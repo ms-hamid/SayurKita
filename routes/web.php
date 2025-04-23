@@ -6,7 +6,3 @@ use App\Http\Controllers\ProductController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/junior', function (){
-    return view('junior');
-});
