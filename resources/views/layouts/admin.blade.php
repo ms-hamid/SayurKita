@@ -11,7 +11,7 @@
 <body class="bg-white-100 text-black-800 font-sans">
 
     <!-- Sidebar -->
-    @include('components.sidebar')
+    @include('components.sidebar_admin')
     
     <!-- Content -->
     <main>

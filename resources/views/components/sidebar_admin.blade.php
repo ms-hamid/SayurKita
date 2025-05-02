@@ -1,4 +1,4 @@
-<nav class="fixed top-0 z-50 w-full bg-white dark:bg-green-800 dark:border-green-700">
+<nav class="fixed top-0 z-50 w-full bg-white dark:bg-gray-500 dark:border-gray-400">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
@@ -20,12 +20,12 @@
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
                     <div>
-                        <button type="button" class="flex text-sm bg-green-800 rounded-full focus:ring-4 focus:ring-green-300 dark:focus:ring-green-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button type="button" class="flex text-sm bg-gray-500 rounded-full focus:ring-4 focus:ring-gray-500 dark:focus:ring-gray-400" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full" src="images/logo.png" alt="user photo">
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-green-100 rounded-sm shadow-sm dark:bg-green-800 dark:divide-green-600"
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-green-100 rounded-sm shadow-sm dark:bg-gray-500 dark:divide-gray-400"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-white-900 dark:text-white" role="none">
@@ -47,8 +47,8 @@
     </div>
 </nav>
 
-<aside id="logo-sidebar" style="background-color: #90CF8E" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-    <div style="background-color: #90CF8E" class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+<aside id="logo-sidebar" style="background-color: #D9D9D9" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+    <div style="background-color: #D9D9D9" class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="/admin" class="flex items-center p-2 text-black-900 rounded-lg dark:text-black hover:bg-white dark:hover:bg-white group">
