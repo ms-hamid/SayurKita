@@ -1,3 +1,13 @@
-<div>
-    <!-- It is never too late to be what you might have been. - George Eliot -->
+@extends('layouts.admin')
+
+@section('title','Admin Product')
+
+@section('content')
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        @include('components.breadcrumb', [
+            'pages_name' => 'Product'
+        ])
+    </div>
 </div>
+@endsection
