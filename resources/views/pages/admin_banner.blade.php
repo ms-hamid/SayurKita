@@ -8,6 +8,16 @@
         @include('components.breadcrumb', [
             'pages_name' => 'Banner'
         ])
+        @include('components.breadcrumb_child', [
+            'child_name' => 'List Banner'
+        ])
+        @include('components.modal_add', [
+            'modal' => 'Add Banner',
+            'modal_name' => 'Create New Banner'
+        ])
+        @include('components.admin_table', [
+            
+        ])
     </div>
 </div>
 @endsection

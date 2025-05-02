@@ -11,7 +11,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 max-w-3xl mx-auto">
                 <!-- Card -->
                 <div class="flex items-center bg-gray-300 rounded-xl shadow-md p-4">
-                    <div class="bg-white rounded-lg shadow px-4 py-2 text-center mr-4 font-bold text-lg text-gray-800">
+                    <div class="w-16 h-12 flex items-center justify-center bg-white rounded-lg shadow font-bold text-lg text-gray-800 mr-4">
                         10
                     </div>
                     <div class="pl-5">
@@ -22,7 +22,7 @@
 
                 <!-- Card -->
                 <div class="flex items-center bg-gray-300 rounded-xl shadow-md p-4">
-                    <div class="bg-white rounded-lg shadow px-4 py-2 text-center mr-4 font-bold text-lg text-gray-800">
+                    <div class="w-16 h-12 flex items-center justify-center bg-white rounded-lg shadow font-bold text-lg text-gray-800 mr-4">
                         3
                     </div>
                     <div class="pl-5">
@@ -33,7 +33,7 @@
 
                 <!-- Card -->
                 <div class="flex items-center bg-gray-300 rounded-xl shadow-md p-4">
-                    <div class="bg-white rounded-lg shadow px-4 py-2 text-center mr-4 font-bold text-lg text-gray-800">
+                    <div class="w-16 h-12 flex items-center justify-center bg-white rounded-lg shadow font-bold text-lg text-gray-800 mr-4">
                         5
                     </div>
                     <div class="pl-5">
@@ -44,7 +44,7 @@
 
                 <!-- Card -->
                 <div class="flex items-center bg-gray-300 rounded-xl shadow-md p-4">
-                    <div class="bg-white rounded-lg shadow px-4 py-2 text-center mr-4 font-bold text-lg text-gray-800">
+                    <div class="w-16 h-12 flex items-center justify-center bg-white rounded-lg shadow font-bold text-lg text-gray-800 mr-4">
                         12
                     </div>
                     <div class="pl-5">
