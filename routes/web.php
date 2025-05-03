@@ -17,3 +17,11 @@ Route::get('/admin_blog', [AdminBlogController::class, 'adminBlog']);
 Route::get('/admin_gallery', [AdminGalleryController::class, 'adminGallery']);
 Route::get('/admin_category', [AdminCategoryController::class, 'adminCategory']);
 Route::get('/admin_account', [AdminAccountController::class, 'adminAccount']);
+
+Route::get('/account',function () {
+    return view('pages.settingacc');
+});
+
+Route::get('/password',function () {
+    return view('pages.passwordchg');
+});
