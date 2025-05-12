@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutusController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBannerController;
@@ -35,6 +36,8 @@ Route::get('/login2', [LoginController2::class, 'login2']);
 Route::get('/lupa_password', [ForgetPwController::class, 'step1']);
 Route::get('/lupa_password2', [ForgetPwController2::class, 'step2']);
 Route::get('/lupa_password3', [ForgetPwController3::class, 'step3']);
+
+Route::get('/aboutus', [AboutusController::class, 'aboutus']);
 
 
 
