@@ -4,13 +4,22 @@
     <h1 class="text-2xl font-bold mb-4">Ubah Informasi Password</h1>
     <p class="text-gray-600 mb-6">Informasi dan aktivitas properti Anda secara real-time</p>
 
+    <!-- Avatar Upload + Preview -->
     <div class="flex items-center mb-6">
-    <img src="https://via.placeholder.com/100" alt="Profile" class="w-24 h-24 rounded-full mr-4">
-    <div>
-        <p class="font-semibold text-lg">Muhammad, Faiz</p>
-        <p class="text-sm text-gray-500">Faiz271204</p>
-        <p class="text-sm text-gray-500">082170640976</p>
-    </div>
+        <div class="relative">
+            <img id="profileImage" src="https://via.placeholder.com/100" alt="Profile" class="w-24 h-24 rounded-full mr-4 object-cover">
+            <input type="file" id="imageInput" class="absolute bottom-0 right-0 opacity-0 w-6 h-6 cursor-pointer" onchange="previewImage(event)">
+            <label for="imageInput" class="absolute bottom-0 right-0 bg-gray-500 text-white rounded-full p-1 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.5-4.5M19.5 5.5L15 10m-4.5 4.5L5.5 15m0 0L10 19.5M5.5 15L10 10" />
+                </svg>
+            </label>
+        </div>
+        <div>
+            <p class="font-semibold text-lg">Muhammad, Faiz</p>
+            <p class="text-sm text-gray-500">Faiz271204</p>
+            <p class="text-sm text-gray-500">082170640976</p>
+        </div>
     </div>
 
     <!-- Form -->
@@ -43,4 +52,16 @@
             </div>
         </form>
     </div>
+
+    <!-- JS: Preview image -->
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('profileImage');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 @endsection

@@ -7,22 +7,16 @@ use Illuminate\Http\Request;
 class AdminBannerController extends Controller
 {
     public function adminBanner(){
-    $columns = ['Product name', 'Color', 'Category', 'Price', 'Action'];
+    $columns = ['Banner Image', 'Action'];
 
     $rows = [
         [
-            'Product name' => 'Apple MacBook Pro 17"',
-            'Color' => 'Silver',
-            'Category' => 'Laptop',
-            'Price' => '$2999',
-            'Action' => '<a href="#">Edit</a>'
+            'Banner Image' => 'banner1.jpg',
+            'Action' => '<a href="#">Edit</a><br><a href="#">Delete</a>'
         ],
         [
-            'Product name' => 'Magic Mouse 2',
-            'Color' => 'Black',
-            'Category' => 'Accessories',
-            'Price' => '$99',
-            'Action' => '<a href="#">Edit</a>'
+            'Banner Image' => 'banner2.jpg',
+            'Action' => '<a href="#">Edit</a><br><a href="#">Delete</a>'
         ],
     ];
 
