@@ -64,3 +64,7 @@ Route::get('/list_product', function () {
 Route::get('/blog', function () {
     return view('pages.blog');
 });
+
+Route::get('/products', function () {
+    return view('pages.products');
+});
