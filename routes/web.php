@@ -39,19 +39,28 @@ Route::get('/lupa_password3', [ForgetPwController3::class, 'step3']);
 
 Route::get('/aboutus', [AboutusController::class, 'aboutus']);
 
-
-
-
-
-
-
-Route::get('/account',function () {
+Route::get('/account', function () {
     return view('pages.settingacc');
 });
 
-Route::get('/password',function () {
+Route::get('/settingacc', function () {
+    return view('pages.settingacc');
+});
+
+Route::get('/passwordchg', function () {
     return view('pages.passwordchg');
 });
 
+Route::get('/Login', [LoginController::class, 'Login_pengunjung']);
 
+Route::get('/gallery', function () {
+    return view('pages.gallery');
+});
 
+Route::get('/list_product', function () {
+    return view('pages.list_product');
+});
+
+Route::get('/blog', function () {
+    return view('pages.blog');
+});
