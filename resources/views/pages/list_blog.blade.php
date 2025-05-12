@@ -1,4 +1,4 @@
-@extends('layouts.list_product')
+@extends('layouts.list_blog')
 
 @section('title', 'List Blog Page')
 
