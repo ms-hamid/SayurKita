@@ -68,3 +68,7 @@ Route::get('/blog', function () {
 Route::get('/products', function () {
     return view('pages.products');
 });
+
+Route::get('/list_blog', function () {
+    return view('pages.list_blog');
+});
