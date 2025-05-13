@@ -15,16 +15,16 @@
             <a href="#" class="px-4 py-2 hover:text-gray-500">Home</a>
           </li>
           <li>
-            <a href="#" class="px-4 py-2 hover:text-gray-500">Products</a>
+            <a href="products" class="px-4 py-2 hover:text-gray-500">Products</a>
           </li>
           <li>
-            <a href="#" class="px-4 py-2 hover:text-gray-500">About Us</a>
+            <a href="aboutus" class="px-4 py-2 hover:text-gray-500">About Us</a>
           </li>
           <li>
-            <a href="#" class="px-4 py-2 hover:text-gray-500">Blog</a>
+            <a href="blog" class="px-4 py-2 hover:text-gray-500">Blog</a>
           </li>
           <li>
-            <a href="#" class="px-4 py-2 hover:text-gray-500">Gallery</a>
+            <a href="gallery" class="px-4 py-2 hover:text-gray-500">Gallery</a>
           </li>
         </ul>
       </nav>
