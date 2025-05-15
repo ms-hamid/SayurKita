@@ -1,7 +1,7 @@
 <aside class="w-full lg:w-1/5 bg-[#A0D683] shadow-lg p-0 mb-6 lg:mb-0 min-h-screen">
     <ul class="divide-y divide-white">
       <li>
-        <a href="{{ url('account') }}" class="block w-full px-6 py-4 hover:bg-gray-200 active:bg-gray-300 transition">
+        <a href="{{ route('settings') }}" class="block w-full px-6 py-4 hover:bg-gray-200 active:bg-gray-300 transition">
           <div class="flex items-center space-x-3">
             <!-- Ikon Manajemen Akun -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5">
@@ -12,7 +12,7 @@
         </a>
       </li>
       <li>
-        <a href="{{ url('password') }}" class="block w-full px-6 py-4 hover:bg-gray-200 active:bg-gray-300 transition">
+        <a href="{{ route('passwordchg') }}" class="block w-full px-6 py-4 hover:bg-gray-200 active:bg-gray-300 transition">
           <div class="flex items-center space-x-3">
             <!-- Ikon Ganti Password -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5">

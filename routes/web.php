@@ -18,8 +18,13 @@ use App\Http\Controllers\LoginController2;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RegisterController2;
 use App\Http\Controllers\RegisterController3;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ChgPwController;
+use App\Http\Controllers\AccountSettingsController;
 
-Route::get('/home', [landingpageController::class, 'landingpage']);
+Route::get('/home', [landingpageController::class, 'landingpage'])->name('landingpage');
 Route::get('/admin', [AdminDashboardController::class, 'adminDashboard']);
 Route::get('/admin_banner', [AdminBannerController::class, 'adminBanner']);
 Route::get('/admin_product', [AdminProductController::class, 'adminProduct']);
@@ -27,49 +32,27 @@ Route::get('/admin_blog', [AdminBlogController::class, 'adminBlog']);
 Route::get('/admin_gallery', [AdminGalleryController::class, 'adminGallery']);
 Route::get('/admin_category', [AdminCategoryController::class, 'adminCategory']);
 Route::get('/admin_account', [AdminAccountController::class, 'adminAccount']);
-
 Route::get('/register', [RegisterController::class, 'register']);
 Route::get('/register2', [RegisterController2::class, 'register2']);
 Route::get('/register3', [RegisterController3::class, 'register3']);
-
 Route::get('/login', [LoginController::class, 'login']);
 Route::get('/login2', [LoginController2::class, 'login2']);
-
 Route::get('/lupa_password', [ForgetPwController::class, 'step1']);
 Route::get('/lupa_password2', [ForgetPwController2::class, 'step2']);
 Route::get('/lupa_password3', [ForgetPwController3::class, 'step3']);
-
-Route::get('/aboutus', [AboutusController::class, 'aboutus']);
-
-Route::get('/account', function () {
-    return view('pages.settingacc');
-});
-
-Route::get('/settingacc', function () {
-    return view('pages.settingacc');
-});
-
-Route::get('/passwordchg', function () {
-    return view('pages.passwordchg');
-});
-
-Route::get('/Login', [LoginController::class, 'Login_pengunjung']);
-
-Route::get('/gallery', function () {
-    return view('pages.gallery');
-});
+Route::get('/aboutus', [AboutusController::class, 'aboutus'])->name('aboutus');
+Route::get('/settings', [AccountSettingsController::class, 'settingacc'])->name('settings');
+Route::get('/passwordchg', [ChgPwController::class, 'passwordchg'])->name('passwordchg');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/gallery', [GalleryController::class, 'gallery'])->name('gallery');
 
 Route::get('/list_product', function () {
     return view('pages.list_product');
 });
 
-Route::get('/blog', function () {
-    return view('pages.blog');
-});
+Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 
-Route::get('/products', function () {
-    return view('pages.products');
-});
+Route::get('/products', [ProductController::class, 'product'])->name('products');
 
 Route::get('/list_blog', function () {
     return view('pages.list_blog');
