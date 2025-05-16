@@ -18,7 +18,13 @@
                 ['type' => 'file', 'name' => 'image', 'label' => 'Select Image'],
             ]
         ])
-        @include('components.table_admin')
+        @include('components.table_admin', [
+            'modal' => 'Edit',
+            'modal_name' => 'Edit Banner',
+            'fields' => [
+                ['type' => 'file', 'name' => 'image', 'label' => 'Select New Image']
+            ]
+        ])
     </div>
 </div>
 @endsection

@@ -7,16 +7,14 @@ use Illuminate\Http\Request;
 class AdminBannerController extends Controller
 {
     public function adminBanner(){
-    $columns = ['Banner Image', 'Action'];
+    $columns = ['Banner Image'];
 
     $rows = [
         [
             'Banner Image' => 'banner1.jpg',
-            'Action' => '<a href="#">Edit</a><br><a href="#">Delete</a>'
         ],
         [
             'Banner Image' => 'banner2.jpg',
-            'Action' => '<a href="#">Edit</a><br><a href="#">Delete</a>'
         ],
     ];
 

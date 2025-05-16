@@ -12,7 +12,15 @@
             'child_name' => 'List Accounts'
         ])
         @include('components.searchbar')
-        @include('components.table_admin')
+        @include('components.table_admin', [
+            'modal' => 'Edit',
+            'modal_name' => 'Edit Account',
+            'fields' => [
+                ['type' => 'text', 'name' => 'name', 'label' => 'Username'],
+                ['type' => 'text', 'name' => 'name', 'label' => 'Phone Number'],
+                ['type' => 'text', 'name' => 'name', 'label' => 'New Password'],
+            ]
+        ])
     </div>
 </div>
 @endsection

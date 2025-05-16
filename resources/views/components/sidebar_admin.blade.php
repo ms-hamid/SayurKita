@@ -12,7 +12,7 @@
                     </svg>
                 </button>
                 <a href="/admin" class="flex ms-2 md:me-24">
-                    <img src="images/logo.png" class="h-8 me-3" alt="Sayur Kita Logo" />
+                    <img src="images/logo/logo.png" class="h-8 me-3" alt="Sayur Kita Logo" />
                     <span
                         class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Sayur Kita</span>
                 </a>
@@ -22,7 +22,7 @@
                     <div>
                         <button type="button" class="flex text-sm bg-gray-500 rounded-full focus:ring-4 focus:ring-gray-500 dark:focus:ring-gray-400" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full" src="images/logo.png" alt="user photo">
+                            <img class="w-8 h-8 rounded-full" src="images/logo/logo.png" alt="user photo">
                         </button>
                     </div>
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-green-100 rounded-sm shadow-sm dark:bg-gray-500 dark:divide-gray-400"

@@ -20,7 +20,6 @@
             </div>
 
             <form class="p-4 md:p-5">
-
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     @foreach ($fields as $field)
                         <div class="col-span-2">

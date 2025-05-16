@@ -22,7 +22,16 @@
             ]
         ])
         @include('components.searchbar')
-        @include('components.table_admin')
+        @include('components.table_admin', [
+            'modal' => 'Edit',
+            'modal_name' => 'Edit Gallery',
+            'fields' => [
+                ['type' => 'text', 'name' => 'name', 'label' => 'Title'],
+                ['type' => 'textarea', 'name' => 'description', 'label' => 'Description'],
+                ['type' => 'file', 'name' => 'image', 'label' => 'Select New Image'],
+                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
+            ]
+        ])
     </div>
 </div>
 @endsection

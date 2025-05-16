@@ -20,7 +20,14 @@
             ]
         ])
         @include('components.searchbar')
-        @include('components.table_admin')
+        @include('components.table_admin', [
+            'modal' => 'Edit',
+            'modal_name' => 'Edit Category',
+            'fields' => [
+                ['type' => 'text', 'name' => 'name', 'label' => 'Category Name'],
+                ['type' => 'select', 'name' => 'category', 'label' => 'Category Type', 'options' => ['Product', 'Blog', 'Gallery']],
+            ]
+        ])
     </div>
 </div>
 @endsection
