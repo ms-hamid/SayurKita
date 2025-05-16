@@ -46,24 +46,27 @@
         </div>
     </div>
 
-    <!-- Ketua Program Studi & Manajer Proyek -->
+<!-- Ketua Program Studi & Manajer Proyek -->
 <div class="w-full text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
     <h2 class="text-3xl font-bold mb-8">Ketua Program Studi & Manajer Proyek</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-8">
+    
+    <div class="grid sm:grid-cols-2 gap-8 justify-center">
         <!-- Ketua Program Studi -->
-        <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-            <img src="{{ asset('images/yeni rokhayati.jpg') }}" alt="Ketua Program Studi" class="w-62 h-62 object-cover rounded mb-4">
-            <h3 class="font-semibold text-gray-800 text-lg">Yeni Rokhayati,S.Si.,M.Sc</h3>
+        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto hover:scale-105 transition-all duration-300 text-center">
+            <img src="{{ asset('images/yeni rokhayati.jpg') }}" alt="Ketua Program Studi" class="w-36 h-36 object-cover rounded-full mx-auto mb-4 shadow-md">
+            <h3 class="font-semibold text-gray-800 text-lg">Yeni Rokhayati, S.Si., M.Sc</h3>
             <p class="text-sm text-gray-600">Ketua Program Studi Teknik Informatika</p>
         </div>
+
         <!-- Manajer Proyek -->
-        <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-            <img src="{{ asset('images/agung riyadi.jpg') }}" alt="Manajer Proyek" class="w-full h-46 object-cover rounded mb-4">
-            <h3 class="font-semibold text-gray-800 text-lg">Agung Riyadi,S.Si.,M.Kom</h3>
+        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto hover:scale-105 transition-all duration-300 text-center">
+            <img src="{{ asset('images/agung riyadi.jpg') }}" alt="Manajer Proyek" class="w-36 h-36 object-cover rounded-full mx-auto mb-4 shadow-md">
+            <h3 class="font-semibold text-gray-800 text-lg">Agung Riyadi, S.Si., M.Kom</h3>
             <p class="text-sm text-gray-600">Manajer Proyek</p>
         </div>
     </div>
 </div>
+
 
 
     <!-- Our Great Team Section -->
