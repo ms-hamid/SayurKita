@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id('banner_id');
             $table->string('image_path');
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
         });
     }
 

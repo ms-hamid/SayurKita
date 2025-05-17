@@ -16,11 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('image_path')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->softDeletes();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories', 'category_id')->onDelete('cascade');
             $table->timestamps();
         });
     }
