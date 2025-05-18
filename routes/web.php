@@ -24,7 +24,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChgPwController;
 use App\Http\Controllers\AccountSettingsController;
 
-Route::get('/home', [landingpageController::class, 'landingpage'])->name('landingpage');
+Route::get('/', [landingpageController::class, 'landingpage'])->name('landingpage');
 Route::get('/admin', [AdminDashboardController::class, 'adminDashboard']);
 Route::get('/admin_banner', [AdminBannerController::class, 'adminBanner']);
 Route::get('/admin_product', [AdminProductController::class, 'adminProduct']);
