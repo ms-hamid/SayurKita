@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminProduct;
-use App\Models\AdminCategory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,13 +18,9 @@ class AdminProductController extends Controller
             'name' => 'Product Name',
             'description' => 'Description',
             'category_id' => 'Category',
-            'image_path' => 'Image',
+            'image_path' => 'Image'
         ];
-        $data = AdminProduct::select(array_merge(array_keys($columns), ['product_id']))->get();
-
-        $category = AdminCategory::where('category_type', 'Product')
-                ->pluck('category_name', 'category_id')
-                ->toArray();
+        $data = AdminProduct::select(array_keys($columns))->get();
 
         $addFields = [
             [
@@ -46,15 +41,19 @@ class AdminProductController extends Controller
                 'type' => 'file', 
                 'name' => 'image', 
                 'label' => 'Select Image',
-                'required' => true
+                'required' => false
             ],
             [
                 'type' => 'select', 
                 'name' => 'category_id', 
                 'label' => 'Category',
-                'options' => $category,
+                'options' => [
+                    1 => '',
+                    2 => 'Sayuran Segar',
+                    3 => 'Sayuran Frozen',
+                ], 
                 'placeholder' => 'Select category',
-                'required' => true
+                'required' => false
             ],
         ];
 
@@ -83,7 +82,10 @@ class AdminProductController extends Controller
                 'type' => 'select', 
                 'name' => 'category_id', 
                 'label' => 'Category',
-                'options' => $category,
+                'options' => [
+                    1 => 'Sayuran Segar',
+                    2 => 'Sayuran Frozen',
+                ], 
                 'placeholder' => 'Select category',
                 'required' => false
             ],
@@ -109,7 +111,6 @@ class AdminProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'category_id' => 'required|exists:category,category_id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
@@ -144,18 +145,9 @@ class AdminProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
-        $product = AdminProduct::findOrFail($id);
-
-        if (request()->wantsJson() || request()->ajax()) {
-            return response()->json([
-                'success' => true,
-                'data' => $product
-            ]);
-        }
-
-        return view('admin.product.show', compact('product'));
+        
     }
 
     /**
@@ -164,14 +156,14 @@ class AdminProductController extends Controller
     public function edit(string $id)
     {
         $product = AdminProduct::findOrFail($id);
-        $category = AdminCategory::where('category_type', 'Product')->pluck('category_name', 'category_id')->toArray();
-        return view('pages.admin_product.edit', compact('product', 'category'));
+        $category = Category::pluck('name', 'id')->toArray();
+        return view('pages.admin_product', compact('product', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         $product = AdminProduct::findOrFail($id);
 
@@ -179,7 +171,6 @@ class AdminProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'category_id' => 'required|exists:category,category_id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 

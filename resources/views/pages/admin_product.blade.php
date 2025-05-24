@@ -5,33 +5,170 @@
 @section('content')
 <div class="p-4 sm:ml-64">
     <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
+        
+        {{-- Breadcrumb --}}
         @include('components.breadcrumb', [
             'pages_name' => 'Product'
         ])
         @include('components.breadcrumb_child', [
             'child_name' => 'List Product'
         ])
+
+        @include('components.error_message')
+
+        {{-- Modal Add dengan konfigurasi dinamis --}}
         @include('components.modal_add', [
             'modal' => 'Add Product',
             'modal_name' => 'Create New Product',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Product Name'],
-                ['type' => 'textarea', 'name' => 'description', 'label' => 'Description'],
-                ['type' => 'file', 'name' => 'image', 'label' => 'Select Image'],
-                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
-            ]
+            'modal_id' => 'add-product-modal',
+            'form_action' => route('admin_product.store'),
+            'form_method' => 'POST',
+            'fields' => $addFields
         ])
+
+        {{-- Search Bar --}}
         @include('components.searchbar')
+
+        {{-- Table dengan modal edit dinamis --}}
         @include('components.table_admin', [
             'modal' => 'Edit',
             'modal_name' => 'Edit Product',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Product Name'],
-                ['type' => 'textarea', 'name' => 'description', 'label' => 'Description'],
-                ['type' => 'file', 'name' => 'image', 'label' => 'Select New Image'],
-                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
-            ]
+            'modal_id' => 'edit-product-modal',
+            'form_action' => route('admin_product.update', ':id'),
+            'form_method' => 'PATCH',
+            'fields' => $editFields,
+            'data' => $data,
+            'columns' => $columns,
+            'delete_route' => route('admin_product.destroy', ':id'),
+            'edit_route' => 'admin_product.getProduct'
         ])
     </div>
 </div>
+
+{{-- JavaScript untuk handling modal dan AJAX --}}
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle edit button click
+    document.querySelectorAll('.edit-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-id');
+            const modalId = this.getAttribute('data-modal-target');
+            const modal = document.getElementById(modalId);
+            
+            if (!modal) {
+                console.error('Modal not found:', modalId);
+                return;
+            }
+            
+            const form = modal.querySelector('form');
+            
+            // Debug
+            console.log('Product ID:', productId);
+            console.log('Modal ID:', modalId);
+            
+            // Update form action jika diperlukan (untuk kasus dinamis)
+            if (form.getAttribute('action').includes(':id')) {
+                const actionUrl = form.getAttribute('action').replace(':id', productId);
+                form.setAttribute('action', actionUrl);
+            }
+            
+            // Fetch product data untuk populate form
+            fetch(`{{ url('admin_product') }}/${productId}`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    const product = data.data;
+                    
+                    // Populate form fields
+                    const nameInput = modal.querySelector('input[name="name"]');
+                    const descInput = modal.querySelector('textarea[name="description"]');
+                    const categorySelect = modal.querySelector('select[name="category_id"]');
+                    
+                    if (nameInput) nameInput.value = product.name || '';
+                    if (descInput) descInput.value = product.description || '';
+                    if (categorySelect) categorySelect.value = product.category_id || '';
+                    
+                    // Show current image if exists
+                    const imagePreview = modal.querySelector('#image-preview');
+                    if (product.image_path && imagePreview) {
+                        imagePreview.src = `/storage/${product.image_path}`;
+                        imagePreview.style.display = 'block';
+                    }
+                } else {
+                    console.error('Failed to fetch product data:', data);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching product data:', error);
+                // Tidak perlu alert, karena form masih bisa digunakan untuk edit
+            });
+        });
+    });
+
+    // Handle delete button click
+    document.querySelectorAll('.delete-btn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-id');
+            const productName = this.getAttribute('data-name');
+            
+            if (confirm(`Apakah Anda yakin ingin menghapus product "${productName}"?`)) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `{{ url('admin_product') }}/${productId}`;
+                
+                // Add CSRF token
+                const csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}';
+                form.appendChild(csrfToken);
+                
+                // Add method spoofing for DELETE
+                const methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                methodInput.value = 'DELETE';
+                form.appendChild(methodInput);
+                
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+
+    // Preview image before upload
+    document.querySelectorAll('input[type="file"]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            const file = this.files[0];
+            const previewId = this.getAttribute('data-preview');
+            
+            if (file && previewId) {
+                const preview = document.getElementById(previewId);
+                if (preview) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+    });
+});
+</script>
+@endpush
 @endsection

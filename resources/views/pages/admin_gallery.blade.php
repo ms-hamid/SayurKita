@@ -11,26 +11,27 @@
         @include('components.breadcrumb_child', [
             'child_name' => 'List Gallery'
         ])
+        @include('components.error_message')
         @include('components.modal_add', [
             'modal' => 'Add Gallery',
             'modal_name' => 'Create New Gallery',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Title'],
-                ['type' => 'textarea', 'name' => 'description', 'label' => 'Description'],
-                ['type' => 'file', 'name' => 'image', 'label' => 'Select Image'],
-                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
-            ]
+            'modal_id' => 'add-gallery-modal',
+            'form_action' => route('admin_gallery.store'),
+            'form_method' => 'POST',
+            'fields' => $addFields
         ])
         @include('components.searchbar')
         @include('components.table_admin', [
             'modal' => 'Edit',
             'modal_name' => 'Edit Gallery',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Title'],
-                ['type' => 'textarea', 'name' => 'description', 'label' => 'Description'],
-                ['type' => 'file', 'name' => 'image', 'label' => 'Select New Image'],
-                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
-            ]
+            'modal_id' => 'edit-gallery-modal',
+            'form_action' => route('admin_gallery.update', ':id'),
+            'form_method' => 'PUT',
+            'fields' => $editFields,
+            'data' => $data,
+            'columns' => $columns,
+            'delete_route' => route('admin_gallery.destroy', ':id'),
+            'edit_route' => 'admin_gallery.update'
         ])
     </div>
 </div>

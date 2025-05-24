@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('banner', function (Blueprint $table) {
             $table->id('banner_id');
             $table->string('image_path');
             $table->softDeletes();

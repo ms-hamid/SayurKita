@@ -11,26 +11,27 @@
         @include('components.breadcrumb_child', [
             'child_name' => 'List Blog'
         ])
+        @include('components.error_message')
         @include('components.modal_add', [
             'modal' => 'Add Blog',
             'modal_name' => 'Create New Blog',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Blog Title'],
-                ['type' => 'textarea', 'name' => 'description', 'label' => 'Content'],
-                ['type' => 'file', 'name' => 'image', 'label' => 'Select Image'],
-                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
-            ]
+            'modal_id' => 'add-blog-modal',
+            'form_action' => route('admin_blog.store'),
+            'form_method' => 'POST',
+            'fields' => $addFields
         ])
         @include('components.searchbar')
         @include('components.table_admin', [
             'modal' => 'Edit',
             'modal_name' => 'Edit Blog',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Blog Title'],
-                ['type' => 'textarea', 'name' => 'description', 'label' => 'Content'],
-                ['type' => 'file', 'name' => 'image', 'label' => 'Select New Image'],
-                ['type' => 'select', 'name' => 'category', 'label' => 'Category', 'options' => ['A', 'B', 'C']],
-            ]
+            'modal_id' => 'edit-blog-modal',
+            'form_action' => route('admin_blog.update', ':id'),
+            'form_method' => 'PUT',
+            'fields' => $editFields,
+            'data' => $data,
+            'columns' => $columns,
+            'delete_route' => 'admin_blog.destroy',
+            'edit_route' => 'admin_blog.update'
         ])
     </div>
 </div>
