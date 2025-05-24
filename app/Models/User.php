@@ -18,8 +18,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
+        'phone_number',
         'password',
     ];
 
@@ -44,5 +44,30 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class, 'created_by');
+    }
+    
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class, 'created_by');
+    }
+
+    public function banners()
+    {
+        return $this->hasMany(Banner::class, 'created_by');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'created_by');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'created_by');
     }
 }
