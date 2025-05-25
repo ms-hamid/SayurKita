@@ -21,7 +21,7 @@ class AdminGalleryController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image',
         ];
-        $data = AdminGallery::select(array_keys($columns))->get();
+        $data = AdminGallery::select(array_merge(array_keys($columns), ['gallery_id']))->get();
 
         $category = AdminCategory::where('category_type', 'Gallery')
                 ->pluck('category_name', 'category_id')
@@ -31,15 +31,15 @@ class AdminGalleryController extends Controller
             [
                 'type' => 'text', 
                 'name' => 'title', 
-                'label' => 'Product Name',
-                'placeholder' => 'Enter product name',
+                'label' => 'Gallery Name',
+                'placeholder' => 'Enter gallery name',
                 'required' => true
             ],
             [
                 'type' => 'textarea', 
                 'name' => 'description', 
                 'label' => 'Description',
-                'placeholder' => 'Enter product description',
+                'placeholder' => 'Enter gallery description',
                 'required' => true
             ],
             [
@@ -77,7 +77,7 @@ class AdminGalleryController extends Controller
                 'type' => 'file', 
                 'name' => 'image', 
                 'label' => 'Select New Image',
-                'required' => true
+                'required' => false
             ],
             [
                 'type' => 'select', 
@@ -120,13 +120,13 @@ class AdminGalleryController extends Controller
         }
 
         try {
-            $data = $request->only(['title', 'description', 'image_path', 'category_id']);
+            $data = $request->only(['title', 'description', 'category_id']);
             
             // Handle file upload
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('gallery', $filename, 'public');
+                $path = $file->storeAs('galleries', $filename, 'public');
                 $data['image_path'] = $path;
             }
 
@@ -144,9 +144,18 @@ class AdminGalleryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $gallery = AdminGallery::findOrFail($id);
+
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'data' => $gallery
+            ]);
+        }
+
+        return view('admin_gallery.show', compact('gallery'));
     }
 
     /**
@@ -154,15 +163,57 @@ class AdminGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $gallery = AdminGallery::findOrFail($id);
+        $category = AdminCategory::where('category_type', 'Gallery')->pluck('category_name', 'category_id')->toArray();
+        return view('pages.admin_gallery.edit', compact('gallery', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $gallery = AdminGallery::findOrFail($id);
+
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:category,category_id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            $data = $request->only(['title', 'description', 'category_id']);
+            
+            // Handle file upload
+            if ($request->hasFile('image')) {
+                // Hapus file lama jika ada
+                if ($gallery->image_path && Storage::disk('public')->exists($gallery->image_path)) {
+                    Storage::disk('public')->delete($gallery->image_path);
+                }
+                
+                $file = $request->file('image');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('galleries', $filename, 'public');
+                $data['image_path'] = $path;
+            }
+
+            $gallery->update($data);
+
+            return redirect()->route('admin_gallery.index')
+                ->with('success', 'Gallery berhasil diupdate!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 
     /**
@@ -170,6 +221,40 @@ class AdminGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $gallery = AdminGallery::findOrFail($id);
+            
+            // Hapus file gambar jika ada
+            if ($gallery->image_path && Storage::disk('public')->exists($gallery->image_path)) {
+                Storage::disk('public')->delete($gallery->image_path);
+            }
+            
+            $gallery->delete();
+
+            return redirect()->route('admin_gallery.index')
+                ->with('success', 'Gallery berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Get gallery data for AJAX (untuk modal edit)
+     */
+    public function getGallery($id)
+    {
+        try {
+            $gallery = AdminGallery::findOrFail($id);
+            return response()->json([
+                'success' => true,
+                'data' => $gallery
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gallery not found'
+            ], 404);
+        }
     }
 }

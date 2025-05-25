@@ -36,6 +36,7 @@
             'modal_id' => 'edit-product-modal',
             'form_action' => route('admin_product.update', ':id'),
             'form_method' => 'PATCH',
+            'id_field' => 'product_id',
             'fields' => $editFields,
             'data' => $data,
             'columns' => $columns,

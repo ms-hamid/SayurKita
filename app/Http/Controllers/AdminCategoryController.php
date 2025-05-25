@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
             'category_name' => 'Category Name',
             'category_type' => 'Category Type',
         ];
-        $data = AdminCategory::select(array_keys($columns))->get();
+        $data = AdminCategory::select(array_merge(array_keys($columns), ['category_id']))->get();
 
         $addFields = [
             [
@@ -45,7 +45,7 @@ class AdminCategoryController extends Controller
         $editFields = [
             [
                 'type' => 'text', 
-                'name' => 'category', 
+                'name' => 'category_name', 
                 'label' => 'Category Name',
                 'placeholder' => 'Enter category name',
                 'required' => true
@@ -60,7 +60,7 @@ class AdminCategoryController extends Controller
                     3 => 'Gallery',
                 ], 
                 'placeholder' => 'Select Category Type',
-                'required' => true
+                'required' => false
             ],
         ];
 
@@ -82,7 +82,7 @@ class AdminCategoryController extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'categor_name' => 'required|string|max:255',
+            'category_name' => 'required|string|max:255',
             'category_type' => 'required|string'
         ]);
 
@@ -109,9 +109,18 @@ class AdminCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $category = AdminCategory::findOrFail($id);
+
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'data' => $category
+            ]);
+        }
+
+        return view('admin_category.show', compact('category'));
     }
 
     /**
@@ -119,7 +128,8 @@ class AdminCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = AdminCategory::findOrFail($id);
+        return view('pages.admin_category.edit', compact('category'));
     }
 
     /**
@@ -127,7 +137,7 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $product = AdminProduct::findOrFail($id);
+        $category = AdminCategory::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
@@ -142,24 +152,11 @@ class AdminCategoryController extends Controller
         }
 
         try {
-            $data = $request->only(['category_name',  'category_type']);
-            
-            // Handle file upload
-            if ($request->hasFile('image')) {
-                // Hapus file lama jika ada
-                if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
-                    Storage::disk('public')->delete($product->image_path);
-                }
-                
-                $file = $request->file('image');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('products', $filename, 'public');
-                $data['image_path'] = $path;
-            }
+            $data = $request->only(['category_name', 'category_type']);
 
-            $product->update($data);
+            $category->update($data);
 
-            return redirect()->route('admin_product.index')
+            return redirect()->route('admin_category.index')
                 ->with('success', 'Category berhasil diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -173,6 +170,35 @@ class AdminCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $category = AdminCategory::findOrFail($id);
+
+            $category->delete();
+
+            return redirect()->route('admin_category.index')
+                ->with('success', 'Category berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Get category data for AJAX (untuk modal edit)
+     */
+    public function getCategory($id)
+    {
+        try {
+            $category = AdminCategory::findOrFail($id);
+            return response()->json([
+                'success' => true,
+                'data' => $category
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Category not found'
+            ], 404);
+        }
     }
 }

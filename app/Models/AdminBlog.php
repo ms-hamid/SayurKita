@@ -11,7 +11,7 @@ class AdminBlog extends Model
 
     protected $table = 'blog';
 
-    protected $primaryKey = 'banner_id';
+    protected $primaryKey = 'blog_id';
 
     protected $fillable = [
         'title', 'content', 'image_path', 'category_id' 

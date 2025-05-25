@@ -28,7 +28,6 @@ Route::get('/', [landingpageController::class, 'landingpage'])->name('landingpag
 Route::get('/admin', [AdminDashboardController::class, 'index']);
 Route::resource('admin_banner', AdminBannerController::class);
 Route::resource('admin_product', AdminProductController::class);
-Route::get('admin_product/get/{id}', [AdminProductController::class, 'getProduct'])->name('admin_product.getProduct');
 Route::resource('admin_blog', AdminBlogController::class);
 Route::resource('admin_gallery', AdminGalleryController::class);
 Route::resource('admin_category', AdminCategoryController::class);

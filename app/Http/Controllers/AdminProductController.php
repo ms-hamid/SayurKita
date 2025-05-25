@@ -85,7 +85,7 @@ class AdminProductController extends Controller
                 'label' => 'Category',
                 'options' => $category,
                 'placeholder' => 'Select category',
-                'required' => false
+                'required' => true
             ],
         ];
 
@@ -155,7 +155,7 @@ class AdminProductController extends Controller
             ]);
         }
 
-        return view('admin.product.show', compact('product'));
+        return view('admin_product.show', compact('product'));
     }
 
     /**

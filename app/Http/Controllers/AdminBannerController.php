@@ -17,7 +17,7 @@ class AdminBannerController extends Controller
         $columns = [
             'image_path' => 'Image'
         ];
-        $data = AdminBanner::select(array_keys($columns))->get();
+        $data = AdminBanner::select(array_merge(array_keys($columns), ['banner_id']))->get();
 
         $addFields = [
             [
@@ -32,7 +32,7 @@ class AdminBannerController extends Controller
             [
             'type' => 'file', 
             'name' => 'image', 
-            'label' => 'Select Image',
+            'label' => 'Select New Image',
             'required' => true
             ]
         ];
@@ -71,7 +71,7 @@ class AdminBannerController extends Controller
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('banner', $filename, 'public');
+                $path = $file->storeAs('banners', $filename, 'public');
                 $data['image_path'] = $path;
             }
 
@@ -91,7 +91,16 @@ class AdminBannerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $banner = AdminBanner::findOrFail($id);
+
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'data' => $banner
+            ]);
+        }
+
+        return view('pages.admin_banner.show', compact('banner'));
     }
 
     /**
@@ -99,19 +108,20 @@ class AdminBannerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $banner = AdminBanner::findOrFail($id);
+        return view('pages.admin_banner.edit', compact('banner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $product = AdminBanner::findOrFail($id);
+        $banner = AdminBanner::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($validator->fails()) {
@@ -121,22 +131,20 @@ class AdminBannerController extends Controller
         }
 
         try {
-            $data = $request->only([]);
-            
             // Handle file upload
             if ($request->hasFile('image')) {
                 // Hapus file lama jika ada
-                if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
-                    Storage::disk('public')->delete($product->image_path);
+                if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
+                    Storage::disk('public')->delete($banner->image_path);
                 }
                 
                 $file = $request->file('image');
                 $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('products', $filename, 'public');
+                $path = $file->storeAs('banners', $filename, 'public');
                 $data['image_path'] = $path;
             }
 
-            $product->update($data);
+            $banner->update($data);
 
             return redirect()->route('admin_banner.index')
                 ->with('success', 'Banner berhasil diupdate!');
@@ -153,14 +161,14 @@ class AdminBannerController extends Controller
     public function destroy(string $id)
     {
         try {
-            $product = AdminBanner::findOrFail($id);
+            $banner = AdminBanner::findOrFail($id);
             
             // Hapus file gambar jika ada
-            if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
-                Storage::disk('public')->delete($product->image_path);
+            if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
+                Storage::disk('public')->delete($banner->image_path);
             }
             
-            $product->delete();
+            $banner->delete();
 
             return redirect()->route('admin_banner.index')
                 ->with('success', 'Banner berhasil dihapus!');
@@ -171,12 +179,12 @@ class AdminBannerController extends Controller
     }
 
     /**
-     * Get product data for AJAX (untuk modal edit)
+     * Get banner data for AJAX (untuk modal edit)
      */
     public function getBanner($id)
     {
         try {
-            $product = AdminBanner::findOrFail($id);
+            $banner = AdminBanner::findOrFail($id);
             return response()->json([
                 'success' => true,
                 'data' => $banner
