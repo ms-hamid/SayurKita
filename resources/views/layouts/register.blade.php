@@ -77,7 +77,7 @@ button::after {
   transform-origin: center;
 }
 
-button:active::after {
+button:active::after { 
   transform: scale(3);
   opacity: 1;
   transition: 0s;

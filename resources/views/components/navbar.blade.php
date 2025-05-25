@@ -59,7 +59,7 @@
   </div>
 
   <!-- Menu mobile -->
-  <ul id="mobile-menu" class="hidden w-full mt-4 md:hidden flex flex-col gap-4">
+  <ul id="mobile-menu" class="hidden w-full mt-4 md:hidden flex-col gap-4">
     <li class="font-semibold"><a href="{{ route('landingpage') }}" class="{{ request()->routeIs('landingpage') ? 'text-cp-dark-blue' : 'hover:text-cp-dark-blue' }}">Home</a></li>
     <li class="font-semibold"><a href="{{ route('products') }}" class="{{ request()->routeIs('products') ? 'text-cp-dark-blue' : 'hover:text-cp-dark-blue' }}">Products</a></li>
     <li class="font-semibold"><a href="{{ route('aboutus') }}" class="{{ request()->routeIs('aboutus') ? 'text-cp-dark-blue' : 'hover:text-cp-dark-blue' }}">About Us</a></li>
