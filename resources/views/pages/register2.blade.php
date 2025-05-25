@@ -3,7 +3,7 @@
 @section('title', 'Register2')
 
 @section('content')
-<div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center">
+<div class="p-8 rounded-lg w-full max-w-md text-center">
     <!-- Logo + Text -->
     <div class="flex items-center justify-center mb-4">
         <img src="{{ asset('images/logo.png') }}" alt="Sayur Kita Logo" class="w-12 h-12 mr-2">

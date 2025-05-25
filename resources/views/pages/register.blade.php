@@ -2,6 +2,8 @@
 
 @section('title', 'Register')
 
+
+
 @section('content')
 <div class="flex items-center justify-center gap-3 mb-4">
     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12">
