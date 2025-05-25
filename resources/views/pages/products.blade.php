@@ -2,7 +2,7 @@
 
 @section('title', 'Products')
 
-@section('content')
+@section('content') 
 <div class="bg-gray-100 py-10 px-4 min-h-screen">
     <div class="max-w-6xl mx-auto space-y-6">
 
