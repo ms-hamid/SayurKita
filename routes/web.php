@@ -45,10 +45,10 @@ Route::get('/settings', [AccountSettingsController::class, 'settingacc'])->name(
 Route::get('/passwordchg', [ChgPwController::class, 'passwordchg'])->name('passwordchg');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/gallery', [GalleryController::class, 'gallery'])->name('gallery');
-
-Route::get('/list_product', function () {
-    return view('pages.list_product');
-});
+Route::get('/list_product', [ProductController::class, 'list'])->name('list_product');
+//Route::get('/list_product', function () {
+//    return view('pages.list_product');
+//});
 
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 
