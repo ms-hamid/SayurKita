@@ -25,7 +25,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Sidebar Filter -->
-        <aside class="md:col-span-1 bg-gray-100 p-6 rounded shadow">
+        <aside class="md:col-span-1 bg-gray-100 p-6 rounded shadow font-poppins">
             <h2 class="text-lg font-semibold mb-4">Filter By</h2>
             <form class="space-y-4 text-sm text-gray-700">
                 <div><input type="checkbox" id="terbaru"> <label for="terbaru">Update terbaru</label></div>
