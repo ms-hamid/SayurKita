@@ -52,7 +52,9 @@ Route::get('/list_product', [ProductController::class, 'list'])->name('list_prod
 
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 
-Route::get('/products', [ProductController::class, 'product'])->name('products');
+Route::get('/products', [ProductController::class, 'list'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'product']);
+Route::post('/products/{id}/comment', [ProductController::class, 'submitComment']);
 
 Route::get('/list_blog', function () {
     return view('pages.list_blog');
