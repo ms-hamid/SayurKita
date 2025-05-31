@@ -19,6 +19,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RegisterController2;
 use App\Http\Controllers\RegisterController3;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ListProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChgPwController;
@@ -45,7 +46,6 @@ Route::get('/settings', [AccountSettingsController::class, 'settingacc'])->name(
 Route::get('/passwordchg', [ChgPwController::class, 'passwordchg'])->name('passwordchg');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/gallery', [GalleryController::class, 'gallery'])->name('gallery');
-Route::get('/list_product', [ProductController::class, 'list'])->name('list_product');
 //Route::get('/list_product', function () {
 //    return view('pages.list_product');
 //});
@@ -55,6 +55,7 @@ Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 Route::get('/products', [ProductController::class, 'list'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'product']);
 Route::post('/products/{id}/comment', [ProductController::class, 'submitComment']);
+Route::get('/list_product', [ListProductController::class, 'index'])->name('list_product');
 
 Route::get('/list_blog', function () {
     return view('pages.list_blog');
