@@ -27,7 +27,9 @@
         ])
 
         {{-- Search Bar --}}
-        @include('components.searchbar')
+        @include('components.searchbar', [
+            'search' => route('admin_product.show', ':search')
+        ])
 
         {{-- Table dengan modal edit dinamis --}}
         @include('components.table_admin', [

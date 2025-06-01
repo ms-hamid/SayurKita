@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminBlog;
 use App\Models\AdminCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,7 @@ class AdminBlogController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image'
         ];
-        $data = AdminBlog::select(array_merge(array_keys($columns), ['blog_id']))->get();
+        $data = AdminBlog::select(array_merge(array_keys($columns), ['blog_id']))->paginate(10);
 
         $category = AdminCategory::where('category_type', 'Blog')
                 ->pluck('category_name', 'category_id')
@@ -130,7 +131,9 @@ class AdminBlogController extends Controller
                 $data['image_path'] = $path;
             }
 
-        AdminBlog::create($data);
+            $data['user_id'] = Auth::id();
+
+            AdminBlog::create($data);
 
             return redirect()->route('admin_blog.index')
                 ->with('success', 'Blog berhasil ditambahkan!');

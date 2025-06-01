@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdminBanner;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,7 @@ class AdminBannerController extends Controller
         $columns = [
             'image_path' => 'Image'
         ];
-        $data = AdminBanner::select(array_merge(array_keys($columns), ['banner_id']))->get();
+        $data = AdminBanner::select(array_merge(array_keys($columns), ['banner_id']))->paginate(10);
 
         $addFields = [
             [
@@ -75,7 +76,9 @@ class AdminBannerController extends Controller
                 $data['image_path'] = $path;
             }
 
-        AdminBanner::create($data);
+            $data['user_id'] = Auth::id();
+
+            AdminBanner::create($data);
 
             return redirect()->route('admin_banner.index')
                 ->with('success', 'Banner berhasil ditambahkan!');

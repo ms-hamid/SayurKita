@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminGallery;
 use App\Models\AdminCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,7 @@ class AdminGalleryController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image',
         ];
-        $data = AdminGallery::select(array_merge(array_keys($columns), ['gallery_id']))->get();
+        $data = AdminGallery::select(array_merge(array_keys($columns), ['gallery_id']))->paginate(10);
 
         $category = AdminCategory::where('category_type', 'Gallery')
                 ->pluck('category_name', 'category_id')
@@ -130,7 +131,9 @@ class AdminGalleryController extends Controller
                 $data['image_path'] = $path;
             }
 
-        AdminGallery::create($data);
+            $data['user_id'] = Auth::id();
+
+            AdminGallery::create($data);
 
             return redirect()->route('admin_gallery.index')
                 ->with('success', 'Gallery berhasil ditambahkan!');

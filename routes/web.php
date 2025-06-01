@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminAccountController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPwController;
 use App\Http\Controllers\ForgetPwController2;
 use App\Http\Controllers\ForgetPwController3;
@@ -33,6 +34,20 @@ Route::resource('admin_blog', AdminBlogController::class);
 Route::resource('admin_gallery', AdminGalleryController::class);
 Route::resource('admin_category', AdminCategoryController::class);
 Route::resource('admin_account', AdminAccountController::class);
+
+Route::get('/logindummy', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/logindummy', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/logindummydb', function () {
+    return view('pages.admin_dashboard');
+})->middleware('auth');
+
+Route::get('/hash-password', function () {
+    return Hash::make('@dmin');
+});
+
+
 Route::get('/register', [RegisterController::class, 'register']);
 Route::get('/register2', [RegisterController2::class, 'register2']);
 Route::get('/register3', [RegisterController3::class, 'register3']);

@@ -1,10 +1,10 @@
-<nav class="fixed top-0 z-50 w-full bg-white dark:bg-gray-500 dark:border-gray-400">
+<nav class="fixed top-0 z-50 w-full bg-[#2E7D32]">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
-                <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-green-700 dark:focus:ring-gray-600">
+                <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-4 text-sm text-green-700 rounded-lg sm:hidden hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-700 dark:text-green-700 dark:hover:bg-[#A2D77C] dark:focus:ring-green-700">
                     <span class="sr-only">Open sidebar</span>
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    <svg class="w-8 h-8" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path clip-rule="evenodd" fill-rule="evenodd"
                             d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
@@ -13,31 +13,29 @@
                 </button>
                 <a href="/admin" class="flex ms-2 md:me-24">
                     <img src="images/logo/logo.png" class="h-8 me-3" alt="Sayur Kita Logo" />
-                    <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Sayur Kita</span>
+                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">Sayur Kita</span>
                 </a>
             </div>
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
                     <div>
-                        <button type="button" class="flex text-sm bg-gray-500 rounded-full focus:ring-4 focus:ring-gray-500 dark:focus:ring-gray-400" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button type="button" class="flex text-sm bg-[#2E7D32] rounded-full focus:ring-4 focus:ring-green-600 focus:ring-green-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full" src="images/logo/logo.png" alt="user photo">
                         </button>
                     </div>
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-green-100 rounded-sm shadow-sm dark:bg-gray-500 dark:divide-gray-400"
-                        id="dropdown-user">
+                    <div class="z-50 hidden my-4 text-base list-none bg-[#2E7D32] divide-y divide-white rounded-sm shadow-sm" id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="text-sm text-white-900 dark:text-white" role="none">
+                            <p class="text-sm text-white" role="none">
                                 Sayur Kita  
                             </p>
-                            <p class="text-sm font-medium text-white-900 dark:text-white" role="none">
+                            <p class="text-sm font-medium text-white" role="none">
                                 sayurkita@gmail.com
                             </p>
                         </div>
                         <ul class="py-1" role="none">
                             <li>
-                                <a href="#" class="block px-4 py-2 text-sm text-white-700 hover:bg-white-100 dark:text-white dark:hover:bg-green-600 dark:hover:text-white" role="menuitem">Settings</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-green-600" role="menuitem">Settings</a>
                             </li>
                         </ul>
                     </div>
@@ -47,8 +45,8 @@
     </div>
 </nav>
 
-<aside id="logo-sidebar" style="background-color: #D9D9D9" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
-    <div style="background-color: #D9D9D9" class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-[#A2D77C] sm:translate-x-0" aria-label="Sidebar">
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-[#A2D77C]">
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="/admin" class="flex items-center p-2 text-black-900 rounded-lg dark:text-black hover:bg-white dark:hover:bg-white group">
