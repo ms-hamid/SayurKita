@@ -1,7 +1,7 @@
 <nav class="flex" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
-            <a href="#" class="inline-flex items-center text-sm font-medium text-black hover:text-green-300 dark:text-black dark:hover:text-green-300">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-black hover:text-[#2E7D32]">
                 <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 20">
                     <path
@@ -18,7 +18,7 @@
                         d="m1 9 4-4-4-4" />
                 </svg>
                 <a href="#"
-                    class="ms-1 text-sm font-medium text-black hover:text-green-300 md:ms-2 dark:text-black dark:hover:text-green-300">{{ $pages_name }}</a>
+                    class="ms-1 text-sm font-medium text-black hover:text-[#2E7D32] md:ms-2 ">{{ $pages_name }}</a>
             </div>
         </li>
     </ol>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdminBlog extends Model
 {
@@ -14,7 +15,7 @@ class AdminBlog extends Model
     protected $primaryKey = 'blog_id';
 
     protected $fillable = [
-        'title', 'content', 'image_path', 'category_id' 
+        'title', 'content', 'image_path', 'category_id', 'user_id'
     ];
 
     protected $casts = [

@@ -12,14 +12,19 @@
             'child_name' => 'List Accounts'
         ])
         @include('components.searchbar')
+        {{-- Table dengan modal edit dinamis --}}
         @include('components.table_admin', [
             'modal' => 'Edit',
             'modal_name' => 'Edit Account',
-            'fields' => [
-                ['type' => 'text', 'name' => 'name', 'label' => 'Username'],
-                ['type' => 'text', 'name' => 'name', 'label' => 'Phone Number'],
-                ['type' => 'text', 'name' => 'name', 'label' => 'New Password'],
-            ]
+            'modal_id' => 'edit-account-modal',
+            'form_action' => route('admin_account.update', ':id'),
+            'form_method' => 'PATCH',
+            'id_field' => 'user_id',
+            'fields' => $editFields,
+            'data' => $data,
+            'columns' => $columns,
+            'delete_route' => route('admin_account.destroy', ':id'),
+            'edit_route' => 'admin_account.getAccount'
         ])
     </div>
 </div>

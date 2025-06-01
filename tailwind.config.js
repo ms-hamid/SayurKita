@@ -4,12 +4,13 @@ module.exports = {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
+    "./node_modules/flowbite/**/*.js"
   ],
   theme: {
     extend: {
-       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'], // Tambahkan ini
-        sans: ['Poppins', 'sans-serif'],    // Opsional: jadikan default
+        fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'],
       },
       colors: {
         'cp-dark-blue': '#312ECB',
@@ -17,5 +18,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }

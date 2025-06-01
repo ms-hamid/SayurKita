@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdminBanner extends Model
 {
@@ -14,7 +15,7 @@ class AdminBanner extends Model
     protected $primaryKey = 'banner_id';
 
     protected $fillable = [
-        'image_path'
+        'image_path', 'user_id'
     ];
 
     protected $casts = [

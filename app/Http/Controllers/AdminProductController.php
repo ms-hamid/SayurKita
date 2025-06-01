@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdminProduct;
 use App\Models\AdminCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,7 @@ class AdminProductController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image',
         ];
-        $data = AdminProduct::select(array_merge(array_keys($columns), ['product_id']))->get();
+        $data = AdminProduct::select(array_merge(array_keys($columns), ['product_id']))->paginate(10);
 
         $category = AdminCategory::where('category_type', 'Product')
                 ->pluck('category_name', 'category_id')
@@ -130,7 +131,9 @@ class AdminProductController extends Controller
                 $data['image_path'] = $path;
             }
 
-        AdminProduct::create($data);
+            $data['user_id'] = Auth::id();
+
+            AdminProduct::create($data);
 
             return redirect()->route('admin_product.index')
                 ->with('success', 'Product berhasil ditambahkan!');
@@ -144,18 +147,19 @@ class AdminProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $product = AdminProduct::findOrFail($id);
+        $product = AdminProduct::query();
 
-        if (request()->wantsJson() || request()->ajax()) {
-            return response()->json([
-                'success' => true,
-                'data' => $product
-            ]);
+        // Jika ada input pencarian
+        if ($request->has('search')) {
+            $search = $request->search;
+            $prodcut->where('name', 'like', "%$search%")->orWhere('description', 'like', "%$search%");
         }
 
-        return view('admin_product.show', compact('product'));
+        $product = $product->latest()->paginate(10); // bisa pakai ->get() juga
+
+        return view('pages.admin_product', compact('product'));
     }
 
     /**
@@ -228,7 +232,7 @@ class AdminProductController extends Controller
             if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
                 Storage::disk('public')->delete($product->image_path);
             }
-            
+
             $product->delete();
 
             return redirect()->route('admin_product.index')

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminAccount;
+use App\Models\AdminUser;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,8 +18,33 @@ class AdminAccountController extends Controller
             'username' => 'Product Name',
             'phone_number' => 'Phone Number'
         ];
-        $data = AdminAccount::select(array_keys($columns))->get();
-        return view('pages.admin_account', compact('data', 'columns'));
+
+        $editFields = [
+            [
+                'type' => 'text', 
+                'name' => 'name', 
+                'label' => 'Username Name',
+                'placeholder' => 'Enter username name',
+                'required' => true
+            ],
+            [
+                'type' => 'text', 
+                'name' => 'password', 
+                'label' => 'Password',
+                'placeholder' => 'Enter new password',
+                'required' => true
+            ],
+            [
+                'type' => 'text', 
+                'name' => 'confirm_password', 
+                'label' => 'Confirmation Password',
+                'placeholder' => 'Enter password confirmation',
+                'required' => true
+            ],
+        ];
+
+        $data = AdminUser::select(array_keys($columns))->paginate(10);
+        return view('pages.admin_account', compact('data', 'columns', 'editFields'));
     }
 
     /**

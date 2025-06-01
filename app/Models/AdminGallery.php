@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdminGallery extends Model
 {
@@ -14,7 +15,7 @@ class AdminGallery extends Model
     protected $primaryKey = 'gallery_id';
 
     protected $fillable = [
-        'title', 'description', 'image_path', 'category_id'
+        'title', 'description', 'image_path', 'category_id', 'user_id'
     ];
 
     protected $casts = [

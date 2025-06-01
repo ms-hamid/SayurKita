@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
             'category_name' => 'Category Name',
             'category_type' => 'Category Type',
         ];
-        $data = AdminCategory::select(array_merge(array_keys($columns), ['category_id']))->get();
+        $data = AdminCategory::select(array_merge(array_keys($columns), ['category_id']))->paginate(10);
 
         $addFields = [
             [

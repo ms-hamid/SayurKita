@@ -34,6 +34,7 @@
             'delete_route' => route('admin_category.destroy', ':id'),
             'edit_route' => 'admin_category.getCategory'
         ])
+        
     </div>
 </div>
 
