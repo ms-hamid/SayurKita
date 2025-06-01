@@ -10,13 +10,15 @@ class Product extends Model
 {
     //
     use HasFactory, SoftDeletes;
+    protected $table = 'product';
+    protected $primaryKey = 'product_id';
 
     protected $fillable = [
-        'product_name',
-        'product_description',
-        'image_path',
-        'category_id',
-        'created_by',
+    'name',
+    'description',
+    'image_path',
+    'category_id',
+    'user_id',
     ];
 
     public function user()
