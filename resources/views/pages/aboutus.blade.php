@@ -5,117 +5,105 @@
 @section('content')
 <main class="w-full px-4 md:px-16 lg:px-24 py-12 space-y-12">
 
-    <!-- Banner Besar di Atas -->
-    <div class="w-full h-50 md:h-60 rounded-lg overflow-hidden shadow-lg aos-init aos-animate" data-aos="fade-up">
-    <img src="{{ asset('images/sayur1.jpg') }}" alt="Banner Utama" class="w-full h-full object-cover object-center" style="object-position: center bottom;">
+  <!-- Banner Slideshow dengan efek hover zoom -->
+  <div class="relative rounded-lg shadow-lg overflow-hidden mb-12 group">
+    <div id="banner-slideshow" class="relative w-full h-96 overflow-hidden">
+      @foreach (['sayur1.jpg', 'sayur2.jpg', 'sayur3.jpg'] as $key => $img)
+        <img 
+          src="{{ asset('images/' . $img) }}" 
+          class="absolute top-0 left-0 w-full h-96 object-cover transition duration-1000 ease-in-out transform {{ $key === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-100' }} group-hover:scale-105" 
+          alt="Banner Image {{ $key }}" 
+        >
+      @endforeach
     </div>
-
-    <!-- Gambar Utama & Deskripsi -->
-    <div class="bg-white shadow-md rounded-md p-6 text-center w-full aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
-        <h1 class="text-3xl font-bold mb-4">Tentang Kami</h1>
-        <p class="text-gray-600 text-sm max-w-3xl mx-auto">Sayur Kita adalah platform Content Management System (CMS) berbasis web yang dirancang khusus untuk mendukung kegiatan ekspor sayur lokal. Dibangun menggunakan framework Laravel, Sayur Kita hadir sebagai solusi digital yang memudahkan pengelolaan informasi, data ekspor, serta komunikasi antara pelaku usaha dan mitra ekspor.</p>
-        <p class="text-gray-600 text-sm max-w-4xl mx-auto">Kami percaya bahwa potensi sayur lokal Indonesia sangat besar untuk bersaing di pasar global. Melalui teknologi yang kami kembangkan, kami ingin membantu petani, eksportir, dan pelaku UMKM untuk lebih mudah mengelola proses ekspor secara efisien, transparan, dan terorganisir.</p>
-        <p class="text-gray-600 text-sm max-w-3xl mx-auto">Dengan Sayur Kita, kami tidak hanya menyediakan sistem yang andal, tetapi juga berkomitmen untuk mendorong pertumbuhan ekonomi lokal melalui digitalisasi dan pemberdayaan pelaku usaha di sektor pertanian.</p>
+    <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
+    <div class="absolute bottom-6 left-6 text-white text-4xl font-bold drop-shadow-lg z-20 animate-fade-in-blur">
+      Tentang Kami
     </div>
+  </div>
 
-    <!-- Dua Kolom Informasi -->
-    <div class="grid md:grid-cols-2 gap-8 w-full aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-        <div class="bg-white p-8 rounded-lg shadow text-center w-full">
-            <h3 class="text-xl font-semibold mb-4">Misi Kami</h3>
-            <p class="text-gray-600 text-base">Memberikan dukungan kepada petani lokal untuk mendistribusikan hasil pertanian mereka secara adil dan efisien melalui teknologi digital.</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow text-center w-full">
-            <h3 class="text-xl font-semibold mb-4">Visi Kami</h3>
-            <p class="text-gray-600 text-base">Membangun ekosistem pertanian berkelanjutan yang terhubung langsung antara petani dan masyarakat luas.</p>
-        </div>
+  <!-- Deskripsi (hover zoom) -->
+  <div 
+    class="bg-white shadow-md rounded-md p-6 text-center w-full transform transition-transform duration-300 ease-in-out hover:scale-105 will-change-transform" 
+    data-aos="fade-up" data-aos-delay="100"
+  >
+    <h1 class="text-3xl font-bold mb-4">Tentang Kami</h1>
+    <p class="text-gray-600 text-sm max-w-3xl mx-auto mb-2">
+      Sayur Kita adalah platform CMS berbasis web yang dirancang untuk mendukung kegiatan ekspor sayur lokal...
+    </p>
+    <p class="text-gray-600 text-sm max-w-4xl mx-auto mb-2">
+      Kami percaya bahwa potensi sayur lokal Indonesia sangat besar untuk bersaing di pasar global...
+    </p>
+    <p class="text-gray-600 text-sm max-w-3xl mx-auto">
+      Kami berkomitmen untuk mendorong pertumbuhan ekonomi lokal melalui digitalisasi...
+    </p>
+  </div>
+
+  <!-- Misi & Visi -->
+  <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="200">
+    <div class="bg-white p-8 rounded-lg shadow text-center transform transition-transform duration-300 ease-in-out hover:scale-105 will-change-transform">
+      <h3 class="text-xl font-semibold mb-4">Misi Kami</h3>
+      <p class="text-gray-600">Memberikan dukungan kepada petani lokal...</p>
     </div>
-
-    <!-- Tiga Gambar Ilustrasi -->
-    <div class="grid md:grid-cols-3 gap-8 w-full aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-        <div class="bg-white rounded-lg shadow p-6">
-            <img src="{{ asset('images/petani lokal.jpg') }}" alt="Petani Lokal" class="w-full h-47 object-cover rounded mb-4 transition-transform transform hover:scale-105 hover:shadow-lg">
-            <p class="text-center font-medium text-gray-700">Petani Lokal</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6">
-            <img src="{{ asset('images/distribusi cepat.png') }}" alt="Distribusi" class="w-full h-46 object-cover rounded mb-4 transition-transform transform hover:scale-105 hover:shadow-lg">
-            <p class="text-center font-medium text-gray-700">Distribusi Cepat</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6">
-            <img src="{{ asset('images/kualitas terbaik.png') }}" alt="Kualitas" class="w-full h-47 object-cover rounded mb-4 transition-transform transform hover:scale-105 hover:shadow-lg">
-            <p class="text-center font-medium text-gray-700">Kualitas Terbaik</p>
-        </div>
+    <div class="bg-white p-8 rounded-lg shadow text-center transform transition-transform duration-300 ease-in-out hover:scale-105 will-change-transform">
+      <h3 class="text-xl font-semibold mb-4">Visi Kami</h3>
+      <p class="text-gray-600">Membangun ekosistem pertanian berkelanjutan...</p>
     </div>
+  </div>
 
-<!-- Ketua Program Studi & Manajer Proyek -->
-<div class="w-full text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+  <!-- Ilustrasi -->
+  <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="300">
+    @foreach ([['src' => 'petani lokal.jpg', 'label' => 'Petani Lokal'], ['src' => 'distribusi cepat.png', 'label' => 'Distribusi Cepat'], ['src' => 'kualitas terbaik.png', 'label' => 'Kualitas Terbaik']] as $item)
+      <div class="bg-white rounded-lg shadow p-6 transform transition-transform duration-300 ease-in-out hover:scale-105 will-change-transform">
+        <img src="{{ asset('images/' . $item['src']) }}" alt="{{ $item['label'] }}" class="w-full h-47 object-cover rounded mb-4">
+        <p class="text-center font-medium text-gray-700">{{ $item['label'] }}</p>
+      </div>
+    @endforeach
+  </div>
+
+  <!-- Ketua Prodi & Manajer -->
+  <div class="text-center" data-aos="fade-up" data-aos-delay="400">
     <h2 class="text-3xl font-bold mb-8">Ketua Program Studi & Manajer Proyek</h2>
-    
-    <div class="grid sm:grid-cols-2 gap-8 justify-center">
-        <!-- Ketua Program Studi -->
-        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto hover:scale-105 transition-all duration-300 text-center">
-            <img src="{{ asset('images/yeni rokhayati.jpg') }}" alt="Ketua Program Studi" class="w-36 h-36 object-cover rounded-full mx-auto mb-4 shadow-md">
-            <h3 class="font-semibold text-gray-800 text-lg">Yeni Rokhayati, S.Si., M.Sc</h3>
-            <p class="text-sm text-gray-600">Ketua Program Studi Teknik Informatika</p>
+    <div class="flex flex-wrap justify-center gap-8 max-w-screen-md mx-auto">
+      @foreach ([['src' => 'yeni rokhayati.jpg', 'name' => 'Yeni Rokhayati, S.Si., M.Sc', 'title' => 'Ketua Program Studi Teknik Informatika'], ['src' => 'agung riyadi.jpg', 'name' => 'Agung Riyadi, S.Si., M.Kom', 'title' => 'Manajer Proyek']] as $person)
+        <div class="bg-white p-6 rounded-xl shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 text-center max-w-sm mx-auto will-change-transform">
+          <img src="{{ asset('images/' . $person['src']) }}" class="w-36 h-36 object-cover rounded-full mx-auto mb-4 shadow-md">
+          <h3 class="font-semibold text-gray-800 text-lg">{{ $person['name'] }}</h3>
+          <p class="text-sm text-gray-600">{{ $person['title'] }}</p>
         </div>
-
-        <!-- Manajer Proyek -->
-        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm mx-auto hover:scale-105 transition-all duration-300 text-center">
-            <img src="{{ asset('images/agung riyadi.jpg') }}" alt="Manajer Proyek" class="w-36 h-36 object-cover rounded-full mx-auto mb-4 shadow-md">
-            <h3 class="font-semibold text-gray-800 text-lg">Agung Riyadi, S.Si., M.Kom</h3>
-            <p class="text-sm text-gray-600">Manajer Proyek</p>
-        </div>
+      @endforeach
     </div>
-</div>
+  </div>
 
-
-
-    <!-- Our Great Team Section -->
-    <div class="w-full text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
-        <h2 class="text-3xl font-bold mb-8">Our Great Team</h2>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            <!-- Member 1 -->
-            <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-                <img src="{{ asset('images/hamid.jpg') }}" class="w-40 h-38 object-cover rounded-full mb-4">
-                <p class="font-semibold text-gray-800">3312411005</p>
-                <p class="font-semibold text-gray-800">Muhammad Syarif Hamid (Leader)</p>
-            </div>
-            <!-- Member 2 -->
-            <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-                <img src="{{ asset('images/dipa.jpg') }}"  class="w-full h-40 object-cover rounded-full mb-4">
-                <p class="font-semibold text-gray-800">3312311101</p>
-                <p class="font-semibold text-gray-800">Nailah Dipa Khairiyah Lubis</p>
-            </div>
-            <!-- Member 3 -->
-            <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-                <img src="{{ asset('images/faiz.jpg') }}" class="w-full h-40 object-cover rounded-full mb-4">
-                <p class="font-semibold text-gray-800">3312411018</p>
-                <p class="font-semibold text-gray-800">Muhammad Faiz Difa Suanda</p>
-            </div>
-            <!-- Member 4 -->
-            <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-                <img src="{{ asset('images/ilham.jpg') }}" class="w-full h-40 object-cover rounded-full mb-4">
-                <p class="font-semibold text-gray-800">3312411003</p>
-                <p class="font-semibold text-gray-800">Muhammad Ilham Tri Adi Putra</p>
-            </div>
-            <!-- Member 5 -->
-            <div class="bg-white p-6 rounded-lg shadow hover:transform hover:scale-105 transition-all">
-                <img src="{{ asset('images/junior.jpg') }}" class="w-full h-40 object-cover rounded-full mb-4">
-                <p class="font-semibold text-gray-800">3312411002</p>
-                <p class="font-semibold text-gray-800">Junior Dirgantara Betan</p>
-            </div>
+  <!-- Our Team -->
+  <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+    <h2 class="text-3xl font-bold mb-8">Our Great Team</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      @foreach ([['src' => 'hamid.jpg', 'nim' => '3312411005', 'name' => 'Muhammad Syarif Hamid (Project Leader)'], ['src' => 'dipa.jpg', 'nim' => '3312311101', 'name' => 'Nailah Dipa Khairiyah Lubis'], ['src' => 'faiz.jpg', 'nim' => '3312411018', 'name' => 'Muhammad Faiz Difa Suanda'], ['src' => 'ilham.jpg', 'nim' => '3312411003', 'name' => 'Muhammad Ilham Tri Adi Putra'], ['src' => 'junior.jpg', 'nim' => '3312411002', 'name' => 'Junior Dirgantara Betan']] as $member)
+        <div class="bg-white p-6 rounded-lg shadow transform transition-transform duration-300 ease-in-out hover:scale-105 text-center will-change-transform">
+          <img src="{{ asset('images/' . $member['src']) }}" class="w-40 h-40 object-cover rounded-full mb-4 mx-auto">
+          <p class="font-semibold text-gray-800">{{ $member['nim'] }}</p>
+          <p class="font-semibold text-gray-800">{{ $member['name'] }}</p>
         </div>
+      @endforeach
     </div>
+  </div>
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+{{-- Slideshow Script --}}
 <script>
-    AOS.init({
-        duration: 800, // Durasi animasi
-        easing: 'ease-in-out', // Easing untuk efek smooth
-        once: true, // Efek hanya terjadi sekali
-        offset: 100, // Menambah jarak scroll untuk memicu animasi
-    });
-</script>
+  const slides = document.querySelectorAll('#banner-slideshow img');
+  let index = 0;
 
+  setInterval(() => {
+    slides[index].classList.remove('opacity-100');
+    slides[index].classList.add('opacity-0');
+
+    index = (index + 1) % slides.length;
+
+    slides[index].classList.remove('opacity-0');
+    slides[index].classList.add('opacity-100');
+  }, 5000);
+</script>
 @endsection
