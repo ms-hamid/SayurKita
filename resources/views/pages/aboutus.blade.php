@@ -18,7 +18,7 @@
     </div>
     <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
     <div class="absolute bottom-6 left-6 text-white text-4xl font-bold drop-shadow-lg z-20 animate-fade-in-blur">
-      Tentang Kami
+      
     </div>
   </div>
 

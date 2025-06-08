@@ -25,7 +25,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChgPwController;
 use App\Http\Controllers\AccountSettingsController;
+use App\Http\Controllers\ListBlogController;
 
+//Admin Routes
 Route::get('/', [landingpageController::class, 'landingpage'])->name('landingpage');
 Route::get('/admin', [AdminDashboardController::class, 'index']);
 Route::resource('admin_banner', AdminBannerController::class);
@@ -47,31 +49,32 @@ Route::get('/hash-password', function () {
     return Hash::make('@dmin');
 });
 
-
+//Form Register
 Route::get('/register', [RegisterController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store'); // <- ini penting
+
 Route::get('/register2', [RegisterController2::class, 'register2']);
 Route::get('/register3', [RegisterController3::class, 'register3']);
+
+//Form Login
 Route::get('/login', [LoginController::class, 'login']);
 Route::get('/login2', [LoginController2::class, 'login2']);
+
+//Form Lupa Password
 Route::get('/lupa_password', [ForgetPwController::class, 'step1']);
 Route::get('/lupa_password2', [ForgetPwController2::class, 'step2']);
 Route::get('/lupa_password3', [ForgetPwController3::class, 'step3']);
+
+
 Route::get('/aboutus', [AboutusController::class, 'aboutus'])->name('aboutus');
 Route::get('/settings', [AccountSettingsController::class, 'settingacc'])->name('settings');
 Route::get('/passwordchg', [ChgPwController::class, 'passwordchg'])->name('passwordchg');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/gallery', [GalleryController::class, 'gallery'])->name('gallery');
-//Route::get('/list_product', function () {
-//    return view('pages.list_product');
-//});
-
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
-
+Route::get('/list_blog', [ListBlogController::class, 'list_blog'])->name('list_blog');
 Route::get('/products', [ProductController::class, 'list'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'product']);
 Route::post('/products/{id}/comment', [ProductController::class, 'submitComment']);
 Route::get('/list_product', [ListProductController::class, 'index'])->name('list_product');
 
-Route::get('/list_blog', function () {
-    return view('pages.list_blog');
-});

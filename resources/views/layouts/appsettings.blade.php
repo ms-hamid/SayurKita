@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'Default Title')</title>
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-   <script>
+  <script>
     tailwind.config = {
       theme: {
         extend: {
@@ -18,18 +18,24 @@
     }
   </script>
 </head>
-<body class="bg-gray-100 font-poppins">
+<body class="bg-gray-100 font-poppins flex flex-col min-h-screen">
+
   <!-- Navbar -->
   @include('components.navbar')
 
-  <div class="flex">
+  <!-- Main Wrapper -->
+  <div class="flex flex-1">
     <!-- Sidebar -->
     @include('components.sidebar')
 
-    <!-- Main Content -->
+    <!-- Page Content -->
     <main class="flex-1 bg-gray-50 p-6">
       @yield('content')
     </main>
   </div>
+
+  <!-- Footer -->
+  @include('components.footer')
+
 </body>
 </html>
