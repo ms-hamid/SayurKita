@@ -15,7 +15,7 @@
     <p class="text-sm text-gray-600">Masukan data akun Anda</p>
 </div>
 
-<form action="#" method="POST" class="space-y-4 text-left">
+<form action="{{ route('register.store') }}" method="POST" class="space-y-4 text-left">
     @csrf
     <div class="flex gap-2">
         <input type="text" name="first_name" placeholder="Nama depan" class="w-1/2 p-2 border border-gray-300 rounded" required>
@@ -26,6 +26,16 @@
     <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" class="w-full p-2 border border-gray-300 rounded" required>
     <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200">Berikutnya</button>
 </form>
+
+@if ($errors->any())
+    <div class="mb-4 p-4 bg-red-200 text-red-700 rounded">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>- {{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <p class="mt-4 text-sm text-gray-600 text-center">
     Sudah punya akun ? <a href="#" class="text-blue-600 hover:underline">Masuk</a>

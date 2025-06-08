@@ -7,10 +7,8 @@
   <p class="text-gray-600 mb-6">Informasi dan aktivitas properti Anda secara real-time</p>
 
   <div class="flex items-center mb-6">
-    <!-- Avatar Profile Picture -->
     <div class="relative">
-      <img id="profileImage" src="https://via.placeholder.com/100" alt="Profile" class="w-24 h-24 rounded-full mr-4">
-      <!-- Input File untuk Gambar -->
+      <img id="profileImage" src="https://via.placeholder.com/100" alt="Profile" class="w-24 h-24 rounded-full mr-4 object-cover">
       <input type="file" id="imageInput" class="absolute bottom-0 right-0 opacity-0 w-6 h-6 cursor-pointer" onchange="previewImage(event)">
       <label for="imageInput" class="absolute bottom-0 right-0 text-white bg-gray-500 rounded-full p-1 cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -18,7 +16,6 @@
         </svg>
       </label>
     </div>
-    
     <div>
       <p class="font-semibold text-lg">Muhammad, Faiz</p>
       <p class="text-sm text-gray-500">Faiz271204</p>
@@ -26,9 +23,8 @@
     </div>
   </div>
 
-  <!-- Form -->
-  <form>
-    <div class="mb-6">
+  <form class="space-y-6">
+    <div>
       <label for="fullName" class="block text-gray-700 font-semibold mb-2">Full Name</label>
       <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
         <input type="text" id="firstName" class="w-full lg:w-1/2 p-2 border border-gray-300 rounded" placeholder="First name">
@@ -36,17 +32,17 @@
       </div>
     </div>
 
-    <div class="mb-6">
+    <div>
       <label for="username" class="block text-gray-700 font-semibold mb-2">Username</label>
       <input type="text" id="username" class="w-full p-2 border border-gray-300 rounded" placeholder="Username">
     </div>
 
-    <div class="mb-6">
+    <div>
       <label for="phoneNumber" class="block text-gray-700 font-semibold mb-2">Nomor Handphone</label>
       <input type="text" id="phoneNumber" class="w-full p-2 border border-gray-300 rounded" placeholder="+62 0821-7064-0976">
     </div>
 
-    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
       Perbarui
     </button>
   </form>
@@ -54,9 +50,8 @@
   <script>
     function previewImage(event) {
       const reader = new FileReader();
-      reader.onload = function() {
-        const output = document.getElementById('profileImage');
-        output.src = reader.result;
+      reader.onload = function () {
+        document.getElementById('profileImage').src = reader.result;
       };
       reader.readAsDataURL(event.target.files[0]);
     }
