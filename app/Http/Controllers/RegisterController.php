@@ -20,19 +20,19 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username',
-            'phone_number' => 'required|string|max:255|unique:users,phone_number',
+            //'phone_number' => 'required|string|max:255|unique:users,phone_number',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
         User::create([
-             'first_name' => $validated['first_name'],
+            'first_name' => $validated['first_name'],
             'last_name' => $validated['last_name'],
             'username' => $validated['username'],
-            'phone_number' => $validated['phone_number'],
+            //'phone_number' => $validated['phone_number'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect('/register')->with('success', 'Akun berhasil dibuat!');
+        return redirect('/register2')->with('success', 'Akun berhasil dibuat! Silakan lanjut isi nomor handphone');
     }
 }
 

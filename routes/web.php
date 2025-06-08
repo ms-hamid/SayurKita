@@ -50,18 +50,20 @@ Route::get('/hash-password', function () {
 });
 
 //Form Register
-Route::get('/register', [RegisterController::class, 'register']);
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store'); // <- ini penting
 
 Route::get('/register2', [RegisterController2::class, 'register2']);
+Route::post('/register2', [RegisterController2::class, 'store2'])->name('register2.store');
+
 Route::get('/register3', [RegisterController3::class, 'register3']);
 
 //Form Login
-Route::get('/login', [LoginController::class, 'login']);
-Route::get('/login2', [LoginController2::class, 'login2']);
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('auth.login');
 
 //Form Lupa Password
-Route::get('/lupa_password', [ForgetPwController::class, 'step1']);
+Route::get('/lupa_password', [ForgetPwController::class, 'step1'])->name('lupa_password');
 Route::get('/lupa_password2', [ForgetPwController2::class, 'step2']);
 Route::get('/lupa_password3', [ForgetPwController3::class, 'step3']);
 

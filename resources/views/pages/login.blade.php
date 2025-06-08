@@ -1,6 +1,6 @@
 @extends('layouts.login')
 
-@section('title', 'Login 1')
+@section('title', 'Login')
 
 @section('content')
 <div class="text-center">
@@ -14,17 +14,27 @@
     <h2 class="text-lg font-bold mb-2">MASUK</h2>
     <p class="text-sm text-gray-700 mb-4">Gunakan Akun Sayur Kita Anda</p>
 
+    <!-- Tampilkan error -->
+    @if ($errors->any())
+        <div class="mb-2 text-red-600 text-sm">
+            {{ $errors->first() }}
+        </div>
+    @endif
+
     <!-- Form -->
-    <form action="#" method="POST">
+    <form action="{{ route('auth.login') }}" method="POST">
         @csrf
         <input type="text" name="username" placeholder="Phone, Username"
                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-        <a href="#" class="text-sm text-blue-600 hover:underline block mb-4">Lupa Nama Pengguna Anda?</a>
+        <input type="password" name="password" placeholder="Password"
+               class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        <a href="{{ route('lupa_password') }}" class="text-sm text-blue-600 hover:underline block mb-4">Lupa Nama Pengguna Anda?</a>
 
         <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700">Berikutnya</button>
 
-        <p class="text-sm text-gray-800 mt-4">Baru menggunakan SayurKita? <a href="#" class="text-blue-600 hover:underline">Buat Akun</a></p>
+        <p class="text-sm text-gray-800 mt-4">Baru menggunakan SayurKita? <a href="{{ route('register') }}" class="text-blue-600 hover:underline">Buat Akun</a></p>
     </form>
 </div>
 @endsection
