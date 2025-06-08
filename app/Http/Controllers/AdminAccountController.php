@@ -43,7 +43,7 @@ class AdminAccountController extends Controller
             ],
         ];
 
-        $query = AdminProduct::select(array_merge(array_keys($columns), ['user_id']));
+        $query = AdminUser::select(array_merge(array_keys($columns), ['user_id']));
 
         if ($request->has('search')) {
             $search = $request->search;

@@ -22,7 +22,7 @@ class AdminBlogController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image'
         ];
-        $query = AdminProduct::select(array_merge(array_keys($columns), ['blog_id']));
+        $query = AdminBlog::select(array_merge(array_keys($columns), ['blog_id']));
 
         if ($request->has('search')) {
             $search = $request->search;

@@ -18,7 +18,7 @@ class AdminBannerController extends Controller
         $columns = [
             'image_path' => 'Image'
         ];
-        $query = AdminProduct::select(array_merge(array_keys($columns), ['banner_id']));
+        $query = AdminBanner::select(array_merge(array_keys($columns), ['banner_id']));
 
         if ($request->has('search')) {
             $search = $request->search;

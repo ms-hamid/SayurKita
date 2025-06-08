@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
             'category_name' => 'Category Name',
             'category_type' => 'Category Type',
         ];
-        $query = AdminProduct::select(array_merge(array_keys($columns), ['category_id']));
+        $query = AdminCategory::select(array_merge(array_keys($columns), ['category_id']));
 
         if ($request->has('search')) {
             $search = $request->search;
