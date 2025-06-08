@@ -19,7 +19,7 @@
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
                     <div>
-                        <button type="button" class="flex text-sm bg-[#2E7D32] rounded-full focus:ring-4 focus:ring-green-600 focus:ring-green-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button type="button" class="flex text-sm bg-[#2E7D32] rounded-full focus:ring-4 focus:ring-green-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
                             <img class="w-8 h-8 rounded-full" src="images/logo/logo.png" alt="user photo">
                         </button>

@@ -6,7 +6,7 @@
     <title>@yield('title','Sayur Kita')</title>
     @vite([ 'resources/css/app.css', 'resources/js/app.js' ])
 </head>
-<body class="bg-white-100 text-black-800 font-sans">
+<body class="bg-gray-200 text-black font-sans">
 
     <!-- Sidebar -->
     @include('components.sidebar_admin')

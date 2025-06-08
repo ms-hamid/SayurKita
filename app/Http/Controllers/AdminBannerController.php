@@ -18,7 +18,14 @@ class AdminBannerController extends Controller
         $columns = [
             'image_path' => 'Image'
         ];
-        $data = AdminBanner::select(array_merge(array_keys($columns), ['banner_id']))->paginate(10);
+        $query = AdminProduct::select(array_merge(array_keys($columns), ['banner_id']));
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $data = $query->paginate(10);
 
         $addFields = [
             [

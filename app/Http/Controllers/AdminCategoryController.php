@@ -18,7 +18,14 @@ class AdminCategoryController extends Controller
             'category_name' => 'Category Name',
             'category_type' => 'Category Type',
         ];
-        $data = AdminCategory::select(array_merge(array_keys($columns), ['category_id']))->paginate(10);
+        $query = AdminProduct::select(array_merge(array_keys($columns), ['category_id']));
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $data = $query->paginate(10);
 
         $addFields = [
             [

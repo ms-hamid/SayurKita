@@ -43,7 +43,15 @@ class AdminAccountController extends Controller
             ],
         ];
 
-        $data = AdminUser::select(array_keys($columns))->paginate(10);
+        $query = AdminProduct::select(array_merge(array_keys($columns), ['user_id']));
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $data = $query->paginate(10);
+
         return view('pages.admin_account', compact('data', 'columns', 'editFields'));
     }
 

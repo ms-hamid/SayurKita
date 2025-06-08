@@ -22,7 +22,14 @@ class AdminBlogController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image'
         ];
-        $data = AdminBlog::select(array_merge(array_keys($columns), ['blog_id']))->paginate(10);
+        $query = AdminProduct::select(array_merge(array_keys($columns), ['blog_id']));
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $data = $query->paginate(10);
 
         $category = AdminCategory::where('category_type', 'Blog')
                 ->pluck('category_name', 'category_id')

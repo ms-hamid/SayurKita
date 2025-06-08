@@ -22,7 +22,14 @@ class AdminGalleryController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image',
         ];
-        $data = AdminGallery::select(array_merge(array_keys($columns), ['gallery_id']))->paginate(10);
+        $query = AdminProduct::select(array_merge(array_keys($columns), ['gallery_id']));
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $data = $query->paginate(10);
 
         $category = AdminCategory::where('category_type', 'Gallery')
                 ->pluck('category_name', 'category_id')

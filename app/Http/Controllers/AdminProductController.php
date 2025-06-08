@@ -14,7 +14,7 @@ class AdminProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $columns = [
             'name' => 'Product Name',
@@ -22,7 +22,15 @@ class AdminProductController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image',
         ];
-        $data = AdminProduct::select(array_merge(array_keys($columns), ['product_id']))->paginate(10);
+
+        $query = AdminProduct::select(array_merge(array_keys($columns), ['product_id']));
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%");
+        }
+
+        $data = $query->paginate(10);
 
         $category = AdminCategory::where('category_type', 'Product')
                 ->pluck('category_name', 'category_id')
@@ -149,17 +157,7 @@ class AdminProductController extends Controller
      */
     public function show(Request $request)
     {
-        $product = AdminProduct::query();
-
-        // Jika ada input pencarian
-        if ($request->has('search')) {
-            $search = $request->search;
-            $prodcut->where('name', 'like', "%$search%")->orWhere('description', 'like', "%$search%");
-        }
-
-        $product = $product->latest()->paginate(10); // bisa pakai ->get() juga
-
-        return view('pages.admin_product', compact('product'));
+        //
     }
 
     /**

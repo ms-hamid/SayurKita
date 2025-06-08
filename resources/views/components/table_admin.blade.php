@@ -31,11 +31,7 @@
                         <button data-modal-target="{{ $modal_id }}-{{ $row->{ $id_field } }}" data-modal-toggle="{{ $modal_id }}-{{ $row->{ $id_field } }}" data-id="{{ $row->{ $id_field } }}" data-name="{{ $row->name ?? 'Item' }}" class="text-blue-600 hover:underline">Edit</button>
 
                         <!-- Tombol Delete -->
-                        <form class="inline" method="POST" action="{{ str_replace(':id', $row->{ $id_field }, $delete_route) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" data-id="{{ $row->{ $id_field } }}" data-name="{{ $row->name ?? 'Item' }}" class="text-red-600 hover:underline">Delete</button>
-                        </form>
+                        @include('components.modal_delete')
                     </td>
                 </tr>
 
@@ -66,5 +62,5 @@
             @endforeach
         </tbody>
     </table>
-    {{ $data->links('pagination::tailwind') }}
+    {{ $data->appends(['search' => request('search')])->links() }}
 </div>

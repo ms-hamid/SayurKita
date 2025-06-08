@@ -1,7 +1,7 @@
-<form action="{{ $search }}" method="GET" class="flex items-center mt-6 max-w-sm ms-0">
-    <label for="simple-search" class="sr-only">Search</label>
+<form name="search" id="search" action="{{ $search }}" method="GET" class="flex items-center mt-6 max-w-sm ms-0">
+    <label for="search" class="sr-only">Search</label>
     <div class="relative w-full">
-        <input type="text" id="simple-search" class="bg-[#A2D77C] border border-gray-300 text-black text-sm placeholder-black rounded-lg focus:ring-[#A2D77C] focus:border-[#A2D77C] block w-full ps-5 p-2.5 " placeholder="Search..." required />
+        <input type="text" name="search" id="search" class="bg-[#A2D77C] border border-gray-300 text-black text-sm placeholder-black rounded-lg focus:ring-[#A2D77C] focus:border-[#A2D77C] block w-full ps-5 p-2.5 " placeholder="Search..." value="{{ request('search') }}">
     </div>
     <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-black bg-[#A2D77C] rounded-lg border border-[#A2D77C] hover:bg-[#2E7D32] focus:ring-4 focus:outline-none focus:ring-[#A2D77C]">
         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
