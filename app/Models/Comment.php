@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TargetType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,15 +14,17 @@ class Comment extends Model
     protected $table = 'comment';
 
     protected $fillable = [
-        'comment',
-        'user_id',
-        'target_id',
-        'target_type',
-        'parent_id',
+    'content', 
+    'user_id',
+    'target_id',
+    'target_type',
+    'product_id',
+    'blog_id', 
+    'parent_id',
     ];
 
     protected $casts = [
-        'target_type' => 'enum',
+    'target_type' => TargetType::class,
     ];
 
     public function user()

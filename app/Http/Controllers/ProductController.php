@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -12,16 +13,16 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $comments = Comment::where('target_type', 'product')
-                    ->where('product_id', $id)
-                    ->whereNull('parent_id') // hanya komentar utama
-                    ->orderByDesc('created_at')
-                    ->with('replies')
-                    ->get();
+            ->where('product_id', $id)
+            ->whereNull('parent_id') // hanya komentar utama
+            ->orderByDesc('created_at')
+            ->with('replies')
+            ->get();
 
         $related = Product::where('product_id', '!=', $id)
-                    ->inRandomOrder()
-                    ->take(3)
-                    ->get();
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
 
         return view('pages.products', compact('product', 'comments', 'related'));
     }
@@ -30,20 +31,25 @@ class ProductController extends Controller
     public function submitComment(Request $request, $id)
     {
         $request->validate([
-            'comment' => 'required|max:500',
+            'content' => 'required|max:500',
         ]);
 
+        // Debug opsional, aktifkan jika masih error
+        // dd($request->all());
+
         Comment::create([
-            'comment' => $request->comment,
-            'user_id' => 0, // Tanpa login, kita set ke 0
+            'content' => $request->input('content'),
+            'user_id' => 0, 
             'target_type' => 'product',
             'product_id' => $id,
+            'blog_id' => 0,
             'parent_id' => null,
         ]);
 
         return back()->with('success', 'Komentar berhasil dikirim!');
     }
-    //Halaman List Product 
+
+    // Halaman list produk
     public function list()
     {
         return view('pages.list_product');

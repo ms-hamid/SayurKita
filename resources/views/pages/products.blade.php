@@ -54,7 +54,7 @@
                                         <p class="font-semibold">Guest</p>
                                         <p class="text-gray-500">{{ $comment->created_at->format('H:i d/m/Y') }}</p>
                                     </div>
-                                    <p class="mt-1 text-gray-700">{{ $comment->comment }}</p>
+                                    <p class="mt-1 text-gray-700">{{ $comment->content }}</p>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                     {{-- FORM KOMENTAR --}}
                     <form method="POST" action="{{ url('/products/' . $product->product_id . '/comment') }}" class="mt-6">
                         @csrf
-                        <textarea name="comment" class="w-full p-2 border rounded" placeholder="Tulis komentar anda..." required></textarea>
+                        <textarea name="content" class="w-full p-2 border rounded" placeholder="Tulis komentar anda..." required></textarea>
                         <button type="submit" class="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Kirim Komentar</button>
                     </form>
 
