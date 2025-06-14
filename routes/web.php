@@ -39,7 +39,7 @@ Route::resource('admin_account', AdminAccountController::class);
 
 Route::get('/logindummy', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/logindummy', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/logindummydb', function () {
     return view('pages.admin_dashboard');
