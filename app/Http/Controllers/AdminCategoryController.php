@@ -12,7 +12,7 @@ class AdminCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $columns = [
             'category_name' => 'Category Name',

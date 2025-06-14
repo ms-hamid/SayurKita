@@ -13,7 +13,7 @@ class AdminBannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $columns = [
             'image_path' => 'Image'

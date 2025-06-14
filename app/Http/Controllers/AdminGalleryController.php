@@ -14,7 +14,7 @@ class AdminGalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $columns = [
             'title' => 'Gallery Title',
