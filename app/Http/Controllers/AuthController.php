@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\AdminUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -22,7 +22,7 @@ class AuthController extends Controller
         'password' => 'required',
         ]);
         
-        $user = AdminUser::where('username', $request->username)->first();
+        $user = User::where('username', $request->username)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user);

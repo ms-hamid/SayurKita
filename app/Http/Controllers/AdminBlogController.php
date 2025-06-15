@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminBlog;
-use App\Models\AdminCategory;
+use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +22,7 @@ class AdminBlogController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image'
         ];
-        $query = AdminBlog::select(array_merge(array_keys($columns), ['blog_id']));
+        $query = Blog::select(array_merge(array_keys($columns), ['blog_id']));
 
         if ($request->has('search')) {
             $search = $request->search;
@@ -31,7 +31,7 @@ class AdminBlogController extends Controller
 
         $data = $query->paginate(10);
 
-        $category = AdminCategory::where('category_type', 'Blog')
+        $category = Category::where('category_type', 'Blog')
                 ->pluck('category_name', 'category_id')
                 ->toArray();
 
@@ -118,7 +118,7 @@ class AdminBlogController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:category,category_id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -140,7 +140,7 @@ class AdminBlogController extends Controller
 
             $data['user_id'] = Auth::id();
 
-            AdminBlog::create($data);
+            Blog::create($data);
 
             return redirect()->route('admin_blog.index')
                 ->with('success', 'Blog berhasil ditambahkan!');
@@ -156,7 +156,7 @@ class AdminBlogController extends Controller
      */
     public function show($id)
     {
-        $blog = AdminBlog::findOrFail($id);
+        $blog = Blog::findOrFail($id);
 
         if (request()->wantsJson() || request()->ajax()) {
             return response()->json([
@@ -173,8 +173,8 @@ class AdminBlogController extends Controller
      */
     public function edit(string $id)
     {
-        $blog = AdminBlog::findOrFail($id);
-        $category = AdminCategory::where('category_type', 'Blog')->pluck('category_name', 'category_id')->toArray();
+        $blog = Blog::findOrFail($id);
+        $category = Category::where('category_type', 'Blog')->pluck('category_name', 'category_id')->toArray();
         return view('pages.admin_blog.edit', compact('blog', 'category'));
     }
 
@@ -183,14 +183,14 @@ class AdminBlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = AdminBlog::findOrFail($id);
+        $product = Blog::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category_id' => 'required|exists:category,category_id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -232,7 +232,7 @@ class AdminBlogController extends Controller
     public function destroy(string $id)
     {
         try {
-            $blog = AdminBlog::findOrFail($id);
+            $blog = Blog::findOrFail($id);
             
             // Hapus file gambar jika ada
             if ($blog->image_path && Storage::disk('public')->exists($blog->image_path)) {
@@ -255,7 +255,7 @@ class AdminBlogController extends Controller
     public function getBlog($id)
     {
         try {
-            $blog = AdminBlog::findOrFail($id);
+            $blog = Blog::findOrFail($id);
             return response()->json([
                 'success' => true,
                 'data' => $blog

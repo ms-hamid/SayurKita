@@ -6,34 +6,69 @@
             <div class="col-span-2">
                 <label for="{{ $field['name'] }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $field['label'] }}</label>
                 @switch($field['type'])
-                    @case('text')
-                        <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" id="{{ $field['name'] }}" value="{{ old($field['name'], $row->{$field['name']} ?? '') }}" placeholder="{{ $field['placeholder'] ?? '' }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full max-w-sm p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" {{ $field['required'] ?? false ? 'required' : '' }}>
-                    @break
-                    @case('file')
-                        <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" id="{{ $field['name'] }}" placeholder="{{ $field['placeholder'] ?? '' }}" accept="{{ $field['accept'] ?? 'image/*' }}" data-preview="preview-{{ $field['name'] }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm" {{ $field['required'] ?? false ? 'required' : '' }}>
-                        <!-- Image preview -->
-                        <img id="preview-{{ $field['name'] }}" src="" alt="Preview" class="mt-2 max-w-full h-auto rounded-lg shadow-sm" style="display: none; max-height: 200px;">
-                    @break
-                    @case('textarea')
-                        <textarea name="{{ $field['name'] }}" id="{{ $field['name'] }}" rows="4" placeholder="{{ $field['placeholder'] ?? '' }}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">{{ old($field['name'], $row->{$field['name']} ?? '') }}</textarea>
-                    @break
-                    @case('select')
-                        <select name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                            @if(isset($field['options']) && is_array($field['options']))
-                                @foreach ($field['options'] as $key => $option)
-                                    @php
-                                        $selectedValue = old($field['name'], $row->{$field['name']} ?? '');
-                                        $optionValue = is_array($option) ? $option['value'] : $key;
-                                        $optionLabel = is_array($option) ? $option['label'] : $option;
-                                    @endphp
-                                    <option value="{{ $optionValue }}" {{ $selectedValue == $optionValue ? 'selected' : '' }}>
-                                        {{ $optionLabel }}
-                                    </option>
-                                @endforeach
-                            @endif
-                        </select>
-                    @break
-                @endswitch
+                                @case('text')
+                                @case('email')
+                                @case('number')
+                                @case('password')
+                                    <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" id="{{ $field['name'] }}" placeholder="{{ $field['placeholder'] ?? '' }}" value="{{ old($field['name'], $field['value'] ?? '') }}" class="bg-[#F5F5F5] border border-gray-300 text-black placeholder-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 @error($field['name']) border-red-500 @enderror" {{ ($field['required'] ?? false) ? 'required' : '' }}>
+                                @break
+                                
+                                @case('file')
+                                    <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" id="{{ $field['name'] }}" accept="{{ $field['accept'] ?? 'image/*' }}" data-preview="preview-{{ $field['name'] }}" class="block w-full text-sm text-black border border-gray-300 rounded-lg cursor-pointer bg-[#F5F5F5] focus:outline-none @error($field['name']) border-red-500 @enderror" {{ ($field['required'] ?? false) ? 'required' : '' }}>
+                                    
+                                    <!-- Image preview -->
+                                    <img id="preview-{{ $field['name'] }}" src="" alt="Preview" class="mt-2 max-w-full h-auto rounded-lg shadow-sm" style="display: none; max-height: 200px;">
+                                @break
+
+                                @case('textarea')
+                                    <textarea name="{{ $field['name'] }}" id="{{ $field['name'] }}" rows="{{ $field['rows'] ?? 4 }}" placeholder="{{ $field['placeholder'] ?? '' }}" class="block p-2.5 w-full text-sm text-black placeholder-black bg-[#F5F5F5] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error($field['name']) border-red-500 @enderror" {{ ($field['required'] ?? false) ? 'required' : '' }}>{{ old($field['name'], $field['value'] ?? '') }}</textarea>
+                                @break
+
+                                @case('select')
+                                    <select name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="bg-[#F5F5F5] placeholder-black border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 @error($field['name']) border-red-500 @enderror" {{ ($field['required'] ?? false) ? 'required' : '' }}>
+                                        <option value="" {{ !old($field['name'], $field['value'] ?? '') ? 'selected' : '' }} disabled>
+                                            {{ $field['placeholder'] ?? 'Select option' }}
+                                        </option>
+                                        @if(isset($field['options']) && is_array($field['options']))
+                                            @foreach ($field['options'] as $key => $option)
+                                                @if(is_array($option))
+                                                    <option value="{{ $option['value'] }}" 
+                                                            {{ old($field['name'], $field['value'] ?? '') == $option['value'] ? 'selected' : '' }}>
+                                                        {{ $option['label'] }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $key }}" 
+                                                            {{ old($field['name'], $field['value'] ?? '') == $key ? 'selected' : '' }}>
+                                                        {{ $option }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                @break
+
+                                @case('checkbox')
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="{{ $field['name'] }}" id="{{ $field['name'] }}" value="{{ $field['value'] ?? '1' }}" {{ old($field['name'], $field['checked'] ?? false) ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="{{ $field['name'] }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            {{ $field['label'] }}
+                                        </label>
+                                    </div>
+                                @break
+
+                                @case('radio')
+                                    @if(isset($field['options']) && is_array($field['options']))
+                                        @foreach ($field['options'] as $key => $option)
+                                            <div class="flex items-center mb-2">
+                                                <input type="radio" name="{{ $field['name'] }}" id="{{ $field['name'] }}_{{ $key }}" value="{{ is_array($option) ? $option['value'] : $key }}"{{ old($field['name'], $field['value'] ?? '') == (is_array($option) ? $option['value'] : $key) ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="{{ $field['name'] }}_{{ $key }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    {{ is_array($option) ? $option['label'] : $option }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                @break
+                            @endswitch
                 @error($field['name'])
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

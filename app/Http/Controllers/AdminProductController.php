@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminProduct;
-use App\Models\AdminCategory;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +23,7 @@ class AdminProductController extends Controller
             'image_path' => 'Image',
         ];
 
-        $query = AdminProduct::select(array_merge(array_keys($columns), ['product_id']));
+        $query = Product::select(array_merge(array_keys($columns), ['product_id']));
 
         if ($request->has('search')) {
             $search = $request->search;
@@ -32,7 +32,7 @@ class AdminProductController extends Controller
 
         $data = $query->paginate(10);
 
-        $category = AdminCategory::where('category_type', 'Product')
+        $category = Category::where('category_type', 'Product')
                 ->pluck('category_name', 'category_id')
                 ->toArray();
 
@@ -119,7 +119,7 @@ class AdminProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'required|exists:category,category_id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:15360'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -141,7 +141,7 @@ class AdminProductController extends Controller
 
             $data['user_id'] = Auth::id();
 
-            AdminProduct::create($data);
+            Product::create($data);
 
             return redirect()->route('admin_product.index')
                 ->with('success', 'Product berhasil ditambahkan!');
@@ -165,8 +165,8 @@ class AdminProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = AdminProduct::findOrFail($id);
-        $category = AdminCategory::where('category_type', 'Product')->pluck('category_name', 'category_id')->toArray();
+        $product = Product::findOrFail($id);
+        $category = Category::where('category_type', 'Product')->pluck('category_name', 'category_id')->toArray();
         return view('pages.admin_product.edit', compact('product', 'category'));
     }
 
@@ -175,7 +175,7 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = AdminProduct::findOrFail($id);
+        $product = Product::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
@@ -224,7 +224,7 @@ class AdminProductController extends Controller
     public function destroy(string $id)
     {
         try {
-            $product = AdminProduct::findOrFail($id);
+            $product = Product::findOrFail($id);
             
             // Hapus file gambar jika ada
             if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
@@ -247,7 +247,7 @@ class AdminProductController extends Controller
     public function getProduct($id)
     {
         try {
-            $product = AdminProduct::findOrFail($id);
+            $product = Product::findOrFail($id);
             return response()->json([
                 'success' => true,
                 'data' => $product

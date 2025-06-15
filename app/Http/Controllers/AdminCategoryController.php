@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminCategory;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
             'category_name' => 'Category Name',
             'category_type' => 'Category Type',
         ];
-        $query = AdminCategory::select(array_merge(array_keys($columns), ['category_id']));
+        $query = Category::select(array_merge(array_keys($columns), ['category_id']));
 
         if ($request->has('search')) {
             $search = $request->search;
@@ -102,7 +102,7 @@ class AdminCategoryController extends Controller
         try {
             $data = $request->only(['category_name', 'category_type']);
 
-        AdminCategory::create($data);
+        Category::create($data);
 
             return redirect()->route('admin_category.index')
                 ->with('success', 'Category berhasil ditambahkan!');
@@ -118,7 +118,7 @@ class AdminCategoryController extends Controller
      */
     public function show($id)
     {
-        $category = AdminCategory::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         if (request()->wantsJson() || request()->ajax()) {
             return response()->json([
@@ -135,7 +135,7 @@ class AdminCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $category = AdminCategory::findOrFail($id);
+        $category = Category::findOrFail($id);
         return view('pages.admin_category.edit', compact('category'));
     }
 
@@ -144,7 +144,7 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = AdminCategory::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
@@ -178,7 +178,7 @@ class AdminCategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $category = AdminCategory::findOrFail($id);
+            $category = Category::findOrFail($id);
 
             $category->delete();
 
@@ -196,7 +196,7 @@ class AdminCategoryController extends Controller
     public function getCategory($id)
     {
         try {
-            $category = AdminCategory::findOrFail($id);
+            $category = Category::findOrFail($id);
             return response()->json([
                 'success' => true,
                 'data' => $category

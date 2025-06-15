@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminBanner;
+use App\Models\Banner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -13,19 +13,13 @@ class AdminBannerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $columns = [
             'image_path' => 'Image'
         ];
-        $query = AdminBanner::select(array_merge(array_keys($columns), ['banner_id']));
-
-        if ($request->has('search')) {
-            $search = $request->search;
-            $query->where('name', 'like', "%$search%");
-        }
-
-        $data = $query->paginate(10);
+        
+        $data = Banner::select(array_merge(array_keys($columns), ['banner_id']))->paginate(10);
 
         $addFields = [
             [
@@ -63,7 +57,7 @@ class AdminBannerController extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -85,7 +79,7 @@ class AdminBannerController extends Controller
 
             $data['user_id'] = Auth::id();
 
-            AdminBanner::create($data);
+            Banner::create($data);
 
             return redirect()->route('admin_banner.index')
                 ->with('success', 'Banner berhasil ditambahkan!');
@@ -101,7 +95,7 @@ class AdminBannerController extends Controller
      */
     public function show(string $id)
     {
-        $banner = AdminBanner::findOrFail($id);
+        $banner = Banner::findOrFail($id);
 
         if (request()->wantsJson() || request()->ajax()) {
             return response()->json([
@@ -118,7 +112,7 @@ class AdminBannerController extends Controller
      */
     public function edit(string $id)
     {
-        $banner = AdminBanner::findOrFail($id);
+        $banner = Banner::findOrFail($id);
         return view('pages.admin_banner.edit', compact('banner'));
     }
 
@@ -127,11 +121,11 @@ class AdminBannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $banner = AdminBanner::findOrFail($id);
+        $banner = Banner::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -171,7 +165,7 @@ class AdminBannerController extends Controller
     public function destroy(string $id)
     {
         try {
-            $banner = AdminBanner::findOrFail($id);
+            $banner = Banner::findOrFail($id);
             
             // Hapus file gambar jika ada
             if ($banner->image_path && Storage::disk('public')->exists($banner->image_path)) {
@@ -194,7 +188,7 @@ class AdminBannerController extends Controller
     public function getBanner($id)
     {
         try {
-            $banner = AdminBanner::findOrFail($id);
+            $banner = Banner::findOrFail($id);
             return response()->json([
                 'success' => true,
                 'data' => $banner

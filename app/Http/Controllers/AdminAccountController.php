@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -43,7 +43,7 @@ class AdminAccountController extends Controller
             ],
         ];
 
-        $query = AdminUser::select(array_merge(array_keys($columns), ['user_id']));
+        $query = User::select(array_merge(array_keys($columns), ['user_id']));
 
         if ($request->has('search')) {
             $search = $request->search;

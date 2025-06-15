@@ -11,6 +11,10 @@ class Blog extends Model
     //
     use HasFactory, SoftDeletes;
 
+    protected $table = 'blog';
+
+    protected $primaryKey = 'blog_id';
+
     protected $fillable = [
         'title',
         'content',
@@ -18,6 +22,20 @@ class Blog extends Model
         'category_id',
         'created_by',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime'
+    ];
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image_path) {
+            return asset('storage/' . $this->image_path);
+        }
+        return asset('images/no-image.png'); // Default image
+    }
 
     public function user()
     {

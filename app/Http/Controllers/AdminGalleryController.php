@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminGallery;
-use App\Models\AdminCategory;
+use App\Models\Gallery;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +22,8 @@ class AdminGalleryController extends Controller
             'category_id' => 'Category',
             'image_path' => 'Image',
         ];
-        $query = AdminGallery::select(array_merge(array_keys($columns), ['gallery_id']));
+
+        $query = Gallery::select(array_merge(array_keys($columns), ['gallery_id']));
 
         if ($request->has('search')) {
             $search = $request->search;
@@ -31,7 +32,7 @@ class AdminGalleryController extends Controller
 
         $data = $query->paginate(10);
 
-        $category = AdminCategory::where('category_type', 'Gallery')
+        $category = Category::where('category_type', 'Gallery')
                 ->pluck('category_name', 'category_id')
                 ->toArray();
         
@@ -118,7 +119,7 @@ class AdminGalleryController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'required|exists:category,category_id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -140,7 +141,7 @@ class AdminGalleryController extends Controller
 
             $data['user_id'] = Auth::id();
 
-            AdminGallery::create($data);
+            Gallery::create($data);
 
             return redirect()->route('admin_gallery.index')
                 ->with('success', 'Gallery berhasil ditambahkan!');
@@ -156,7 +157,7 @@ class AdminGalleryController extends Controller
      */
     public function show($id)
     {
-        $gallery = AdminGallery::findOrFail($id);
+        $gallery = Gallery::findOrFail($id);
 
         if (request()->wantsJson() || request()->ajax()) {
             return response()->json([
@@ -173,8 +174,8 @@ class AdminGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        $gallery = AdminGallery::findOrFail($id);
-        $category = AdminCategory::where('category_type', 'Gallery')->pluck('category_name', 'category_id')->toArray();
+        $gallery = Gallery::findOrFail($id);
+        $category = Category::where('category_type', 'Gallery')->pluck('category_name', 'category_id')->toArray();
         return view('pages.admin_gallery.edit', compact('gallery', 'category'));
     }
 
@@ -183,14 +184,14 @@ class AdminGalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $gallery = AdminGallery::findOrFail($id);
+        $gallery = Gallery::findOrFail($id);
 
         // Validasi input
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'required|exists:category,category_id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         if ($validator->fails()) {
@@ -232,7 +233,7 @@ class AdminGalleryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $gallery = AdminGallery::findOrFail($id);
+            $gallery = Gallery::findOrFail($id);
             
             // Hapus file gambar jika ada
             if ($gallery->image_path && Storage::disk('public')->exists($gallery->image_path)) {
@@ -255,7 +256,7 @@ class AdminGalleryController extends Controller
     public function getGallery($id)
     {
         try {
-            $gallery = AdminGallery::findOrFail($id);
+            $gallery = Gallery::findOrFail($id);
             return response()->json([
                 'success' => true,
                 'data' => $gallery

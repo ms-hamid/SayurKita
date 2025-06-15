@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Gallery extends Model
 {
-    //
     use HasFactory, SoftDeletes;
+
+    protected $table = 'gallery';
+
+    protected $primaryKey = 'gallery_id';
 
     protected $fillable = [
         'title',
@@ -18,6 +21,20 @@ class Gallery extends Model
         'category_id',
         'created_by',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime'
+    ];
+
+    public function getImageUrlAttribute()
+    {
+        if ($this->image_path) {
+            return asset('storage/' . $this->image_path);
+        }
+        return asset('images/no-image.png'); // Default image
+    }
 
     public function user()
     {

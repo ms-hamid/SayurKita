@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    //
-    //use HasFactory, SoftDeletes;
+    
+    use HasFactory, SoftDeletes;
+
     protected $table = 'category';
+
     protected $primaryKey = 'category_id';
 
     protected $fillable = [
@@ -19,7 +21,9 @@ class Category extends Model
     ];
 
     protected $casts = [
-        'category_type' => 'enum',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime'
     ];
 
     public function products()
