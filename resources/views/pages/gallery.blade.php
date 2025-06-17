@@ -5,22 +5,22 @@
 @section('content')
 @php
     $vegetables = [
-        ['name' => 'Tomat', 'description' => 'Buah berair serbaguna yang kaya likopen dan vitamin C.', 'image' => 'tomat.jpg'],
-        ['name' => 'Kol', 'description' => 'Sayur berdaun renyah yang kaya serat dan vitamin C, atau fermentasi.', 'image' => 'kol.jpg'],
-        ['name' => 'Sawi Hijau', 'description' => 'Sayur dengan rasa ringan dan tekstur renyah, cocok untuk mie atau sup.', 'image' => 'sawi hijau.jpg'],
-        ['name' => 'Buncis', 'description' => 'Polong hijau yang kaya protein nabati dan serat, cocok untuk tumisan sehat.', 'image' => 'buncis.jpg'],
-        ['name' => 'Wortel', 'description' => 'Akar manis berwarna oranye yang kaya karoten, baik untuk kesehatan mata dan kulit.', 'image' => 'wortel.jpg'],
-        ['name' => 'Bayam', 'description' => 'Daun hijau lembut yang kaya zat besi dan folat, baik untuk darah dan energi', 'image' => 'bayam.jpg'],
-        ['name' => 'Terong', 'description' => 'Buah ungu yang kaya antioksidan dan serat, nikmat digoreng, dibakar, atau dimasak kuah', 'image' => 'terong.jpg'],
-        ['name' => 'Timun', 'description' => 'Sayur berair yang menyegarkan, baik untuk hidrasi dan kesehatan kulit.', 'image' => 'timun.jpg'],
-        ['name' => 'Brokoli', 'description' => 'Sayur hijau dengan kandungan antioksidan tinggi untuk menjaga kekebalan tubuh.', 'image' => 'brokoli.jpg'],
-        ['name' => 'Kangkung', 'description' => 'Sayuran air yang lezat ditumis dan tinggi serat, membantu melancarkan pencernaan.', 'image' => 'kangkung.jpg'],
-        ['name' => 'Cabe', 'description' => 'Memberi rasa pedas alami, juga tinggi vitamin C dan membantu metabolisme.', 'image' => 'cabe.jpg'],
-        ['name' => 'Pare', 'description' => 'Sayur lembut dan rendah kalori, sering digunakan dalam sayur lodeh atau oseng-oseng.', 'image' => 'pare.jpg'],
+        ['name' => 'Tomat', 'description' => 'Buah berair serbaguna yang kaya likopen dan vitamin C.', 'image' => 'tomat.jpg', 'category' => 'Vitamin C'],
+        ['name' => 'Kol', 'description' => 'Sayur berdaun renyah yang kaya serat dan vitamin C, atau fermentasi.', 'image' => 'kol.jpg', 'category' => 'Vitamin C'],
+        ['name' => 'Sawi Hijau', 'description' => 'Sayur dengan rasa ringan dan tekstur renyah, cocok untuk mie atau sup.', 'image' => 'sawi hijau.jpg', 'category' => 'Serat'],
+        ['name' => 'Buncis', 'description' => 'Polong hijau yang kaya protein nabati dan serat, cocok untuk tumisan sehat.', 'image' => 'buncis.jpg', 'category' => 'Serat'],
+        ['name' => 'Wortel', 'description' => 'Akar manis berwarna oranye yang kaya karoten, baik untuk kesehatan mata dan kulit.', 'image' => 'wortel.jpg', 'category' => 'Vitamin A'],
+        ['name' => 'Bayam', 'description' => 'Daun hijau lembut yang kaya zat besi dan folat, baik untuk darah dan energi', 'image' => 'bayam.jpg', 'category' => 'Zat Besi'],
+        ['name' => 'Terong', 'description' => 'Buah ungu yang kaya antioksidan dan serat, nikmat digoreng, dibakar, atau dimasak kuah', 'image' => 'terong.jpg', 'category' => 'Antioksidan'],
+        ['name' => 'Timun', 'description' => 'Sayur berair yang menyegarkan, baik untuk hidrasi dan kesehatan kulit.', 'image' => 'timun.jpg', 'category' => 'Hidrasi'],
+        ['name' => 'Brokoli', 'description' => 'Sayur hijau dengan kandungan antioksidan tinggi untuk menjaga kekebalan tubuh.', 'image' => 'brokoli.jpg', 'category' => 'Superfood'],
+        ['name' => 'Kangkung', 'description' => 'Sayuran air yang lezat ditumis dan tinggi serat, membantu melancarkan pencernaan.', 'image' => 'kangkung.jpg', 'category' => 'Serat'],
+        ['name' => 'Cabe', 'description' => 'Memberi rasa pedas alami, juga tinggi vitamin C dan membantu metabolisme.', 'image' => 'cabe.jpg', 'category' => 'Vitamin C'],
+        ['name' => 'Pare', 'description' => 'Sayur lembut dan rendah kalori, sering digunakan dalam sayur lodeh atau oseng-oseng.', 'image' => 'pare.jpg', 'category' => 'Rendah Kalori'],
     ];
 @endphp
 
-<!-- Section judul dengan parallax -->
+<!-- Banner Parallax Tetap -->
 <div class="relative h-64 flex items-center justify-center bg-fixed bg-center bg-cover" style="background-image: url('{{ asset('images/parallax banner.jpg') }}');">
     <div class="bg-black bg-opacity-50 w-full h-full absolute inset-0"></div>
     <div class="relative z-10 text-center px-4">
@@ -31,34 +31,117 @@
     </div>
 </div>
 
-<!-- Grid konten -->
-<div class="max-w-7xl mx-auto px-6 sm:px-8 md:px-12 py-16">
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @foreach ($vegetables as $veg)
-        <div
-            class="flex flex-col gap-3 bg-white p-3 rounded-xl shadow-md transform transition duration-300 hover:scale-[1.04] hover:shadow-2xl group relative overflow-hidden"
-            data-aos="fade-up"
-            data-aos-duration="800"
-        >
-            <!-- Efek berkilau saat hover -->
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none animate-pulse rounded-xl"></div>
-
-            <!-- Gambar -->
-            <div class="relative w-full aspect-square rounded-xl overflow-hidden">
-                <div
-                    class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-300 group-hover:scale-110"
-                    style="background-image: url('{{ asset('images/' . $veg['image']) }}')">
+<!-- Galeri Dengan Filter + Modal -->
+<div class="max-w-7xl mx-auto px-4 py-12 font-poppins">
+    <!-- Filter -->
+    <div class="w-full mb-10 bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-2xl shadow-md">
+        <h2 class="text-xl font-semibold text-green-800 mb-4">🔍 Filter Kategori</h2>
+        <form id="filterForm" class="flex flex-wrap gap-4 text-sm text-gray-700">
+            @php $categories = collect($vegetables)->pluck('category')->unique(); @endphp
+            @foreach ($categories as $cat)
+                <div>
+                    <input type="checkbox" id="filter-{{ strtolower(str_replace(' ', '-', $cat)) }}" value="{{ strtolower($cat) }}" class="category-filter">
+                    <label for="filter-{{ strtolower(str_replace(' ', '-', $cat)) }}">{{ $cat }}</label>
                 </div>
-                <div class="absolute inset-0 bg-black bg-opacity-10 group-hover:bg-opacity-25 transition-all duration-300 rounded-xl"></div>
-            </div>
+            @endforeach
+        </form>
+    </div>
 
-            <!-- Info -->
-            <div>
-                <p class="text-[#121811] text-base font-semibold leading-snug">{{ $veg['name'] }}</p>
-                <p class="text-[#68875e] text-sm font-normal leading-normal">{{ $veg['description'] }}</p>
+    <!-- Grid Gallery -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="blogContainer">
+        @foreach ($vegetables as $item)
+        <div class="blog-card cursor-pointer bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
+             data-category="{{ strtolower($item['category']) }}"
+             data-title="{{ $item['name'] }}"
+             data-image="{{ asset('images/' . $item['image']) }}"
+             data-desc="{{ $item['description'] }}">
+            <img src="{{ asset('images/' . $item['image']) }}" loading="lazy" alt="{{ $item['name'] }}" class="w-full h-48 object-cover">
+            <div class="p-4 flex flex-col justify-between flex-grow">
+                <div>
+                    <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mb-2">
+                        {{ $item['category'] }}
+                    </span>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $item['name'] }}</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">{{ $item['description'] }}</p>
+                </div>
             </div>
         </div>
         @endforeach
     </div>
 </div>
+
+<!-- Modal -->
+<div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 relative animate-fade-in">
+        <button id="closeModal" class="absolute top-3 right-4 text-gray-500 hover:bg-gray-200 hover:text-gray-700 text-xl font-bold rounded-full px-2 py-1 transition">&times;</button>
+        <img id="modalImage" src="" alt="" class="w-full h-48 object-cover rounded-lg mb-4">
+        <h3 id="modalTitle" class="text-xl font-bold text-gray-900 mb-2"></h3>
+        <p id="modalDesc" class="text-gray-700 text-sm leading-relaxed max-h-48 overflow-y-auto"></p>
+    </div>
+</div>
+
+<!-- JS Interaktif -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('.category-filter');
+        const blogCards = document.querySelectorAll('.blog-card');
+        const modal = document.getElementById('modalOverlay');
+        const modalImg = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const closeModal = document.getElementById('closeModal');
+
+        // Filter Kategori
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                const selected = [...checkboxes].filter(c => c.checked).map(c => c.value);
+                blogCards.forEach(card => {
+                    const cat = card.dataset.category;
+                    card.style.display = selected.length === 0 || selected.includes(cat) ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Modal Buka
+        blogCards.forEach(card => {
+            card.addEventListener('click', () => {
+                modalImg.src = card.dataset.image;
+                modalTitle.textContent = card.dataset.title;
+                modalDesc.textContent = card.dataset.desc;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                closeModal.focus();
+            });
+        });
+
+        // Modal Tutup
+        closeModal.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+</script>
+
+<!-- Fade Animation -->
+<style>
+    @keyframes fade-in {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-in {
+        animation: fade-in 0.25s ease-out;
+    }
+</style>
 @endsection

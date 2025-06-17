@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 
-
   <script>
     tailwind.config = {
       theme: {
@@ -81,12 +80,26 @@
 
   @include('components.footer')
 
-  <!-- AOS JS & Rellax Init -->
+  <!-- ====== TEAM MODAL (Global) ====== -->
+  <div id="team-modal"
+       class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden justify-center items-center z-[9999] transition-opacity duration-300">
+    <div id="modal-content"
+         class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full relative scale-95 opacity-0 transition-all duration-300">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-600 hover:text-black text-2xl">&times;</button>
+      <img id="modal-img" src="" class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow">
+      <h3 id="modal-name" class="text-xl font-semibold text-center text-gray-800"></h3>
+      <p id="modal-nim" class="text-center text-green-700 font-medium"></p>
+      <p id="modal-desc" class="mt-4 text-center text-gray-600 text-sm"></p>
+    </div>
+  </div>
+
+  <!-- JS Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
+  <!-- Scripts -->
   <script>
     AOS.init({
       duration: 800,
@@ -114,6 +127,39 @@
       glare: true,
       "max-glare": 0.3
     });
+
+    // Modal Logic
+    function openModal(imgSrc, name, nim, desc) {
+      const modal = document.getElementById('team-modal');
+      const content = document.getElementById('modal-content');
+
+      document.getElementById('modal-img').src = imgSrc;
+      document.getElementById('modal-name').textContent = name;
+      document.getElementById('modal-nim').textContent = nim;
+      document.getElementById('modal-desc').textContent = desc;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      // animate content
+      setTimeout(() => {
+        content.classList.remove('opacity-0', 'scale-95');
+        content.classList.add('opacity-100', 'scale-100');
+      }, 50);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('team-modal');
+      const content = document.getElementById('modal-content');
+
+      content.classList.remove('opacity-100', 'scale-100');
+      content.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }, 200);
+    }
   </script>
 
   @stack('scripts')

@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminBlogController;
 use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminAccountController;
+use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetPwController;
 use App\Http\Controllers\ForgetPwController2;
@@ -36,6 +37,9 @@ Route::resource('admin_blog', AdminBlogController::class);
 Route::resource('admin_gallery', AdminGalleryController::class);
 Route::resource('admin_category', AdminCategoryController::class);
 Route::resource('admin_account', AdminAccountController::class);
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminLoginController::class, 'login'])->name('admin.login.submit');
+Route::get('/admin/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 
 Route::get('/logindummy', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/logindummy', [AuthController::class, 'login']);
