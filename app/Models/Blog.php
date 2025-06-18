@@ -2,48 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
 {
-    //
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'blog';
-
     protected $primaryKey = 'blog_id';
 
     protected $fillable = [
-        'title',
-        'content',
-        'image_path',
-        'category_id',
-        'created_by',
+        'title', 'content', 'image_path', 'category_id', 'user_id'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime'
-    ];
-
-    public function getImageUrlAttribute()
+    public function comments()
     {
-        if ($this->image_path) {
-            return asset('storage/' . $this->image_path);
-        }
-        return asset('images/no-image.png'); // Default image
+        return $this->hasMany(Comment::class, 'blog_id', 'blog_id')
+            ->where('target_type', 'blog')
+            ->whereNull('parent_id')
+            ->latest();
     }
 
-    public function user()
+    public function related()
     {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id');
+        return Blog::where('category_id', $this->category_id)
+            ->where('blog_id', '!=', $this->blog_id)
+            ->take(3)
+            ->get();
     }
 }

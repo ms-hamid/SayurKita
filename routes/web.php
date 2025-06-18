@@ -77,7 +77,9 @@ Route::get('/settings', [AccountSettingsController::class, 'settingacc'])->name(
 Route::get('/passwordchg', [ChgPwController::class, 'passwordchg'])->name('passwordchg');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/gallery', [GalleryController::class, 'gallery'])->name('gallery');
-Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::post('/blog/{id}/comment', [BlogController::class, 'storeComment'])->name('blog.comment');
 Route::get('/list_blog', [ListBlogController::class, 'list_blog'])->name('list_blog');
 Route::get('/products', [ProductController::class, 'list'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'product']);
