@@ -3,22 +3,6 @@
 @section('title', 'Gallery')
 
 @section('content')
-@php
-    $vegetables = [
-        ['name' => 'Tomat', 'description' => 'Buah berair serbaguna yang kaya likopen dan vitamin C.', 'image' => 'tomat.jpg', 'category' => 'Vitamin C'],
-        ['name' => 'Kol', 'description' => 'Sayur berdaun renyah yang kaya serat dan vitamin C, atau fermentasi.', 'image' => 'kol.jpg', 'category' => 'Vitamin C'],
-        ['name' => 'Sawi Hijau', 'description' => 'Sayur dengan rasa ringan dan tekstur renyah, cocok untuk mie atau sup.', 'image' => 'sawi hijau.jpg', 'category' => 'Serat'],
-        ['name' => 'Buncis', 'description' => 'Polong hijau yang kaya protein nabati dan serat, cocok untuk tumisan sehat.', 'image' => 'buncis.jpg', 'category' => 'Serat'],
-        ['name' => 'Wortel', 'description' => 'Akar manis berwarna oranye yang kaya karoten, baik untuk kesehatan mata dan kulit.', 'image' => 'wortel.jpg', 'category' => 'Vitamin A'],
-        ['name' => 'Bayam', 'description' => 'Daun hijau lembut yang kaya zat besi dan folat, baik untuk darah dan energi', 'image' => 'bayam.jpg', 'category' => 'Zat Besi'],
-        ['name' => 'Terong', 'description' => 'Buah ungu yang kaya antioksidan dan serat, nikmat digoreng, dibakar, atau dimasak kuah', 'image' => 'terong.jpg', 'category' => 'Antioksidan'],
-        ['name' => 'Timun', 'description' => 'Sayur berair yang menyegarkan, baik untuk hidrasi dan kesehatan kulit.', 'image' => 'timun.jpg', 'category' => 'Hidrasi'],
-        ['name' => 'Brokoli', 'description' => 'Sayur hijau dengan kandungan antioksidan tinggi untuk menjaga kekebalan tubuh.', 'image' => 'brokoli.jpg', 'category' => 'Superfood'],
-        ['name' => 'Kangkung', 'description' => 'Sayuran air yang lezat ditumis dan tinggi serat, membantu melancarkan pencernaan.', 'image' => 'kangkung.jpg', 'category' => 'Serat'],
-        ['name' => 'Cabe', 'description' => 'Memberi rasa pedas alami, juga tinggi vitamin C dan membantu metabolisme.', 'image' => 'cabe.jpg', 'category' => 'Vitamin C'],
-        ['name' => 'Pare', 'description' => 'Sayur lembut dan rendah kalori, sering digunakan dalam sayur lodeh atau oseng-oseng.', 'image' => 'pare.jpg', 'category' => 'Rendah Kalori'],
-    ];
-@endphp
 
 <!-- Banner Parallax Tetap -->
 <div class="relative h-64 flex items-center justify-center bg-fixed bg-center bg-cover" style="background-image: url('{{ asset('images/parallax banner.jpg') }}');">
@@ -37,7 +21,6 @@
     <div class="w-full mb-10 bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-2xl shadow-md">
         <h2 class="text-xl font-semibold text-green-800 mb-4">🔍 Filter Kategori</h2>
         <form id="filterForm" class="flex flex-wrap gap-4 text-sm text-gray-700">
-            @php $categories = collect($vegetables)->pluck('category')->unique(); @endphp
             @foreach ($categories as $cat)
                 <div>
                     <input type="checkbox" id="filter-{{ strtolower(str_replace(' ', '-', $cat)) }}" value="{{ strtolower($cat) }}" class="category-filter">
@@ -51,18 +34,18 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="blogContainer">
         @foreach ($vegetables as $item)
         <div class="blog-card cursor-pointer bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-xl"
-             data-category="{{ strtolower($item['category']) }}"
-             data-title="{{ $item['name'] }}"
-             data-image="{{ asset('images/' . $item['image']) }}"
-             data-desc="{{ $item['description'] }}">
-            <img src="{{ asset('images/' . $item['image']) }}" loading="lazy" alt="{{ $item['name'] }}" class="w-full h-48 object-cover">
+             data-category="{{ strtolower($item->category->category_name ?? 'lainnya') }}"
+             data-title="{{ $item->title }}"
+             data-image="{{ $item->image_url }}"
+             data-desc="{{ $item->description }}">
+            <img src="{{ $item->image_url }}" loading="lazy" alt="{{ $item->title }}" class="w-full h-48 object-cover">
             <div class="p-4 flex flex-col justify-between flex-grow">
                 <div>
                     <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mb-2">
-                        {{ $item['category'] }}
+                        {{ $item->category->category_name ?? 'Tanpa Kategori' }}
                     </span>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $item['name'] }}</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed">{{ $item['description'] }}</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $item->title }}</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">{{ $item->description }}</p>
                 </div>
             </div>
         </div>

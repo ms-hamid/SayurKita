@@ -31,4 +31,9 @@ class Blog extends Model
             ->take(3)
             ->get();
     }
+
+    public function category()
+    {
+    return $this->belongsTo(Category::class, 'category_id');
+    }       
 }
