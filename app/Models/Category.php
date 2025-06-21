@@ -11,7 +11,7 @@ class Category extends Model
     
     use HasFactory, SoftDeletes;
 
-    protected $table = 'category';
+    protected $table = 'categories';
 
     protected $primaryKey = 'category_id';
 
