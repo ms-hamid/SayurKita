@@ -10,8 +10,8 @@
 
 <div class="text-center">
     <p class="text-md mt-2 font-medium text-gray-800">082170640976</p>
-    <h2 class="text-lg font-bold mt-1">Verifikasi Nomor Anda</h2>
-    <p class="text-sm text-gray-700 mb-4">Masukan kode yang kami kirim ke nomor Anda</p>
+    <h2 class="text-lg font-bold mt-1"> Verify Your Phone Number</h2>
+    <p class="text-sm text-gray-700 mb-4">Enter the verification code we sent to your phone number</p>
 
     <form action="#" method="POST" class="space-y-4">
         @csrf
@@ -24,7 +24,7 @@
 
         <button type="submit"
                 class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700">
-            Berikutnya
+            Continue
         </button>
     </form>
 </div>

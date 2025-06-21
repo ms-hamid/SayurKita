@@ -14,8 +14,8 @@
     <p class="text-sm text-gray-700 mb-4">082170640976</p>
 
     <!-- Judul -->
-    <h2 class="text-lg font-bold text-gray-900 mb-1">Verifikasi nomer Anda</h2>
-    <p class="text-sm text-gray-700 mb-6">Masukan kode yang kami kirim ke nomer Anda</p>
+    <h2 class="text-lg font-bold text-gray-900 mb-1">Verify Your Phone Number</h2>
+    <p class="text-sm text-gray-700 mb-6">Enter the verification code we sent to your phone number</p>
 
     <!-- Kotak OTP -->
     <form action="#" method="POST" class="space-y-4">
@@ -26,7 +26,7 @@
             @endfor
         </div>
 
-        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition duration-200">Berikutnya</button>
+        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition duration-200">Continue</button>
     </form>
 </div>
 @endsection

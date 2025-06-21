@@ -10,20 +10,20 @@
 
 <div class="text-center">
     <p class="text-md mt-2 font-medium text-gray-800">082170640976</p>
-    <h2 class="text-lg font-bold mt-1">Lupa Password</h2>
-    <p class="text-sm text-gray-700 mb-4">Masukan Password Baru Anda</p>
+    <h2 class="text-lg font-bold mt-1">Confirm Your New Password</h2>
+    <p class="text-sm text-gray-700 mb-4">Enter Your New Password</p>
 
     <form action="#" method="POST">
         @csrf
-        <input type="password" name="password" placeholder="Password"
+        <input type="password" name="password" placeholder="New Password"
                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-        <input type="password" name="password_confirmation" placeholder="Konfirmasi Password"
+        <input type="password" name="password_confirmation" placeholder="Confirm New Password"
                class="w-full px-4 py-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
         <button type="submit"
                 class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700">
-            Berikutnya
+            Continue
         </button>
     </form>
 </div>
