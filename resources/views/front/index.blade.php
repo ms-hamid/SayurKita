@@ -312,126 +312,65 @@
     </div>
   </div>
   <div id="FAQ" class="bg-[#F6F7FA] w-full py-20 px-[10px] mt-20 -mb-20">
-    <div class="container max-w-[1000px] mx-auto">
-      <div class="flex flex-col lg:flex-row gap-[50px] sm:gap-[70px] items-center">
-          <div class="flex flex-col gap-[30px]">
-              <div class="flex flex-col gap-[10px]">
-                  <h2 class="font-bold text-4xl leading-[45px]">Frequently Asked Questions</h2>
-              </div>
-              <a href="contact.html" class="p-5 bg-cp-black rounded-xl text-white w-fit font-bold">Contact Us</a>
-          </div>
-          <div class="flex flex-col gap-[30px] sm:w-[603px] shrink-0">
-              <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
-                  <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-1">
-                      <span class="font-bold text-lg leading-[27px] text-left">Can installments be beneficial for both?</span>
-                      <div class="arrow w-9 h-9 flex shrink-0">
-                          <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
-                      </div>
-                  </button>
-                  <div id="accordion-faq-1" class="accordion-content hide">
-                      <p class="leading-[30px] text-cp-light-grey pt-[14px]">We want to protect our and clients assets to the max level so that we chose the best one from Jakarta, Indonesia will also protect post building finished completed ahead one.</p>
-                  </div>
-              </div>
-              <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
-                  <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-2">
-                      <span class="font-bold text-lg leading-[27px] text-left">What kind of framework you popular with?</span>
-                      <div class="arrow w-9 h-9 flex shrink-0">
-                          <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
-                      </div>
-                  </button>
-                  <div id="accordion-faq-2" class="accordion-content hide">
-                      <p class="leading-[30px] text-cp-light-grey pt-[14px]">We want to protect our and clients assets to the max level so that we chose the best one from Jakarta, Indonesia will also protect post building finished completed ahead one.</p>
-                  </div>
-              </div>
-              <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
-                  <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-3">
-                      <span class="font-bold text-lg leading-[27px] text-left">What insurance provider do you use?</span>
-                      <div class="arrow w-9 h-9 flex shrink-0">
-                          <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
-                      </div>
-                  </button>
-                  <div id="accordion-faq-3" class="accordion-content hide">
-                      <p class="leading-[30px] text-cp-light-grey pt-[14px]">We want to protect our and clients assets to the max level so that we chose the best one from Jakarta, Indonesia will also protect post building finished completed ahead one.</p>
-                  </div>
-              </div>
-              <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
-                  <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-4">
-                      <span class="font-bold text-lg leading-[27px] text-left">What if we have other questions?</span>
-                      <div class="arrow w-9 h-9 flex shrink-0">
-                          <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
-                      </div>
-                  </button>
-                  <div id="accordion-faq-4" class="accordion-content hide">
-                      <p class="leading-[30px] text-cp-light-grey pt-[14px]">We want to protect our and clients assets to the max level so that we chose the best one from Jakarta, Indonesia will also protect post building finished completed ahead one.</p>
-                  </div>
-              </div>
-          </div>
+      <div class="container max-w-[1000px] mx-auto">
+        <div class="flex flex-col lg:flex-row gap-[50px] sm:gap-[70px] items-center">
+            <div class="flex flex-col gap-[30px]">
+                <div class="flex flex-col gap-[10px]">
+                    <h2 class="font-bold text-4xl leading-[45px]">Frequently Asked Questions</h2>
+                </div>
+                <a href="{{route('aboutus')}}" class="p-5 bg-cp-black rounded-xl text-white w-fit font-bold">Contact Us</a>
+            </div>
+            <div class="flex flex-col gap-[30px] sm:w-[603px] shrink-0">
+                <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
+                    <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-1">
+                        <span class="font-bold text-lg leading-[27px] text-left">What is SayurKita?</span>
+                        <div class="arrow w-9 h-9 flex shrink-0">
+                            <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
+                        </div>
+                    </button>
+                    <div id="accordion-faq-1" class="accordion-content hide">
+                          <p class="leading-[30px] text-cp-light-grey pt-[14px]">SayurKita is dedicated to promoting the freshest and healthiest vegetables, ensuring every meal is packed with nutrition and flavor. Join us in embracing a sustainable and wholesome lifestyle with our top-quality produce.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
+                    <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-2">
+                        <span class="font-bold text-lg leading-[27px] text-left">What kind of type Vegetables are popular?</span>
+                        <div class="arrow w-9 h-9 flex shrink-0">
+                            <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
+                        </div>
+                    </button>
+                    <div id="accordion-faq-2" class="accordion-content hide">
+                          <p class="leading-[30px] text-cp-light-grey pt-[14px]">Some of the most popular types of vegetables include leafy greens like spinach and kale, root vegetables such as carrots and potatoes, and fruit vegetables like tomatoes and bell peppers. These vegetables are loved for their versatility, nutrition, and flavor.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
+                    <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-3">
+                        <span class="font-bold text-lg leading-[27px] text-left">When is the best time to plant vegetables?</span>
+                        <div class="arrow w-9 h-9 flex shrink-0">
+                            <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
+                        </div>
+                    </button>
+                    <div id="accordion-faq-3" class="accordion-content hide">
+                        <p class="leading-[30px] text-cp-light-grey pt-[14px]">The best time to plant vegetables depends on the type of vegetable and the climate. In general, spring is a great time to plant most vegetables, while fall is ideal for certain crops like garlic and onions. It's important to consider the specific needs of each vegetable and the local climate when planning your garden.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
+                    <button class="accordion-button flex justify-between gap-1 items-center" data-accordion="accordion-faq-4">
+                        <span class="font-bold text-lg leading-[27px] text-left">Who is the target audience for SayurKita?</span>
+                        <div class="arrow w-9 h-9 flex shrink-0">
+                            <img src="{{asset('assets/icons/arrow-circle-down.svg')}}" class="transition-all duration-300" alt="icon">
+                        </div>
+                    </button>
+                    <div id="accordion-faq-4" class="accordion-content hide">
+                        <p class="leading-[30px] text-cp-light-grey pt-[14px]">SayurKita is dedicated to promoting the freshest and healthiest vegetables, ensuring every meal is packed with nutrition and flavor. Join us in embracing a sustainable and wholesome lifestyle with our top-quality produce.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
   </div>
-  <footer class="bg-cp-black w-full relative overflow-hidden mt-20">
-    <div class="container max-w-[1130px] mx-auto flex flex-wrap gap-y-4 items-center justify-between pt-[100px] pb-[220px] relative z-10">
-      <div class="flex flex-col gap-10">
-        <div class="flex items-center gap-3">
-          <div class="flex shrink-0 h-[43px] overflow-hidden">
-              <img src="{{asset('assets/logo/logo.svg')}}" class="object-contain w-full h-full" alt="logo">
-          </div>
-          <div class="flex flex-col">
-            <p id="CompanyName" class="font-extrabold text-xl leading-[30px] text-white">ShaynaComp</p>
-            <p id="CompanyTagline" class="text-sm text-cp-light-grey">Build Futuristic Dreams</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-4">
-          <a href="">
-            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
-              <img src="{{asset('assets/icons/youtube.svg')}}" class="w-full h-full object-contain" alt="youtube">
-            </div>
-          </a>
-          <a href="">
-            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
-              <img src="{{asset('assets/icons/whatsapp.svg')}}" class="w-full h-full object-contain" alt="whatsapp">
-            </div>
-          </a>
-          <a href="">
-            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
-              <img src="{{asset('assets/icons/facebook.svg')}}" class="w-full h-full object-contain" alt="facebook">
-            </div>
-          </a>
-          <a href="">
-            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
-              <img src="{{asset('assets/icons/instagram.svg')}}" class="w-full h-full object-contain" alt="instagram">
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-[50px]">
-        <div class="flex flex-col w-[200px] gap-3">
-          <p class="font-bold text-lg text-white">Products</p>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">General Contract</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Building Assessment</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">3D Paper Builder</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Legal Constructions</a>
-        </div>
-        <div class="flex flex-col w-[200px] gap-3">
-          <p class="font-bold text-lg text-white">About</p>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">We’re Hiring</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Our Big Purposes</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Investor Relations</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Media Press</a>
-        </div>
-        <div class="flex flex-col w-[200px] gap-3">
-          <p class="font-bold text-lg text-white">Useful Links</p>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Privacy & Policy</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Terms & Conditions</a>
-          <a href="contact.html" class="text-cp-light-grey hover:text-white transition-all duration-300">Contact Us</a>
-          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Download Template</a>
-        </div>
-      </div>
-    </div>
-    <div class="absolute -bottom-[135px] w-full">
-      <p class="font-extrabold text-[250px] leading-[375px] text-center text-white opacity-5">SHAYNA</p>
-    </div>
-  </footer>
+  <x-footer/>
   <div id="video-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative p-4 w-full lg:w-1/2 max-h-full">
           <!-- Modal content -->

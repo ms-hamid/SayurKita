@@ -1,27 +1,75 @@
-    <footer class="bg-gray-300 text-black py-4 px-6">
-    <div class="flex flex-col md:flex-row justify-between items-center w-full">
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{{asset('css/output.css')}}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- CSS for carousel/flickity-->
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity-fade@2/flickity-fade.css">
+  
+  <!-- CSS for modal/flowbite -->
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" /> -->
+</head>
 
-        <!-- Logo & Kontak -->
-        <div class="flex items-start space-x-4 w-full md:w-1/3">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12">
-        <div class="text-base space-y-1">
-            <p>Jl. Ahmad Yani, Kec. Batam Kota</p>
-            <p>0821-7064-0976</p>
-            <div class="flex items-center space-x-4">
-            <span class="text-base">someone@example.com</span>
-            <div class="flex space-x-3">
-                <a href="#"><img src="{{ asset('images/facebook.png') }}" alt="Facebook" class="h-6 w-6 md:h-7 md:w-7"></a>
-                <a href="#"><img src="{{ asset('images/instagram.png') }}" alt="Instagram" class="h-6 w-6 md:h-7 md:w-7"></a>
-                <a href="#"><img src="{{ asset('images/whatsapp.png') }}" alt="WhatsApp" class="h-6 w-6 md:h-7 md:w-7"></a>
+<footer class="bg-cp-black w-full relative overflow-hidden mt-20">
+    <div class="container max-w-[1130px] mx-auto flex flex-wrap gap-y-4 items-center justify-between pt-[100px] pb-[220px] relative z-10">
+      <div class="flex flex-col gap-10">
+        <div class="flex items-center gap-3">
+          <div class="flex shrink-0 h-[43px] overflow-hidden">
+              <img src="{{asset('assets/logo/logo.png')}}" class="object-contain w-full h-full" alt="logo">
+          </div>
+          <div class="flex flex-col">
+            <p id="CompanyName" class="font-extrabold text-xl leading-[30px] text-white">SayurKita</p>
+            <p id="CompanyTagline" class="text-sm text-cp-light-grey">Vegetable Revolution</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="">
+            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
+              <img src="{{asset('assets/icons/youtube.svg')}}" class="w-full h-full object-contain" alt="youtube">
             </div>
+          </a>
+          <a href="">
+            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
+              <img src="{{asset('assets/icons/whatsapp.svg')}}" class="w-full h-full object-contain" alt="whatsapp">
             </div>
+          </a>
+          <a href="">
+            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
+              <img src="{{asset('assets/icons/facebook.svg')}}" class="w-full h-full object-contain" alt="facebook">
+            </div>
+          </a>
+          <a href="">
+            <div class="w-6 h-6 flex shrink-0 overflow-hidden">
+              <img src="{{asset('assets/icons/instagram.svg')}}" class="w-full h-full object-contain" alt="instagram">
+            </div>
+          </a>
         </div>
+      </div>
+      <div class="flex flex-wrap gap-[50px]">
+        <div class="flex flex-col w-[200px] gap-3">
+          <p class="font-bold text-lg text-white">Products</p>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Product List</a>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Blog List</a>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Gallery</a>
         </div>
-
-        <!-- Copyright -->
-        <div class="w-full md:w-1/3 text-center text-sm mt-4 md:mt-0">
-        &copy; 2025 <span class="font-semibold">Sayur Kita</span>. All rights reserved.
+        <div class="flex flex-col w-[200px] gap-3">
+          <p class="font-bold text-lg text-white">About</p>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">General Contact</a>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Our Big Purposes</a>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">About Us</a>
         </div>
-        <div class="w-full md:w-1/3 hidden md:block"></div>
+        <div class="flex flex-col w-[200px] gap-3">
+          <p class="font-bold text-lg text-white">Useful Links</p>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Privacy & Policy</a>
+          <a href="" class="text-cp-light-grey hover:text-white transition-all duration-300">Terms & Conditions</a>
+          <a href="contact.html" class="text-cp-light-grey hover:text-white transition-all duration-300">Contact Us</a>
+        </div>
+      </div>
     </div>
-    </footer>
+    <div class="absolute -bottom-[135px] w-full">
+      <p class="font-extrabold text-[250px] leading-[375px] text-center text-white opacity-5">SayurKita</p>
+    </div>
+  </footer>
