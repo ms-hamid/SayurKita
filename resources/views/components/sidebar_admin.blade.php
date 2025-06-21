@@ -12,7 +12,7 @@
                     </svg>
                 </button>
                 <a href="/admin" class="flex ms-2 md:me-24">
-                    <img src="images/logo/logo.png" class="h-8 me-3" alt="Sayur Kita Logo" />
+                    <img src="{{ asset('assets/logo/logo.png') }}" class="h-8 me-3" alt="Sayur Kita Logo" />
                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">Sayur Kita</span>
                 </a>
             </div>
@@ -21,7 +21,7 @@
                     <div>
                         <button type="button" class="flex text-sm bg-[#2E7D32] rounded-full focus:ring-4 focus:ring-green-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full" src="images/logo/logo.png" alt="user photo">
+                            <img class="w-8 h-8 rounded-full" src="{{ asset('assets/logo/logo.png') }}" alt="user photo">
                         </button>
                     </div>
                     <div class="z-50 hidden my-4 text-base list-none bg-[#2E7D32] divide-y divide-white rounded-sm shadow-sm" id="dropdown-user">
