@@ -189,20 +189,21 @@
         },
         {
           name: 'blog',
-          label: '{{ $blogLabel }}',
+          label: 'Blog',
+          href: '{{ route('list_blog') }}',
           active: {{ $blogActive ? 'true' : 'false' }},
-          dropdown: [
-            {
-              label: 'Blog',
-              href: '{{ route('blog') }}',
-              active: {{ request()->routeIs('blog') ? 'true' : 'false' }}
-            },
-            {
-              label: 'List Blog',
-              href: '{{ route('list_blog') }}',
-              active: {{ request()->routeIs('list_blog') ? 'true' : 'false' }}
-            }
-          ]
+          // dropdown: [
+          //   {
+          //     label: 'Blog',
+          //     href: '{{ route('blog') }}',
+          //     active: {{ request()->routeIs('blog') ? 'true' : 'false' }}
+          //   },
+          //   {
+          //     label: 'List Blog',
+          //     href: '{{ route('list_blog') }}',
+          //     active: {{ request()->routeIs('list_blog') ? 'true' : 'false' }}
+          //   }
+          // ]
         },
         {
           name: 'aboutus',
