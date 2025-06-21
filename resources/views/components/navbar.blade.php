@@ -17,7 +17,7 @@
 
   <!-- Logo -->
   <div class="flex items-center gap-3">
-    <a href="{{ route('landingpage') }}" class="flex items-center gap-3 hover:opacity-80">
+    <a href="{{ route('front.index') }}" class="flex items-center gap-3 hover:opacity-80">
       <img src="{{ asset('images/logo.png') }}" class="h-[43px] w-auto object-contain" alt="Logo">
       <div>
         <p class="font-extrabold text-xl text-black">SayurKita</p>
@@ -161,7 +161,7 @@
         {
           name: 'landingpage',
           label: 'Home',
-          href: '{{ route('landingpage') }}',
+          href: '{{ route('front.index') }}',
           active: {{ request()->routeIs('landingpage') ? 'true' : 'false' }}
         },
         {
