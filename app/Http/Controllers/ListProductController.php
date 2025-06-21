@@ -12,13 +12,12 @@ class ListProductController extends Controller
     {
         $query = Product::query();
 
-<<<<<<< Updated upstream
+
         // Filter berdasarkan kategori (jika ada)
         if ($request->has('categories') && is_array($request->category)) {
-=======
+
         // Filter berdasarkan kategori
         if ($request->has('category') && is_array($request->category)) {
->>>>>>> Stashed changes
             $query->whereIn('category_id', $request->category);
         }
 
@@ -36,4 +35,5 @@ class ListProductController extends Controller
 
         return view('pages.list_product', compact('vegetables', 'categories'));
     }
+}
 }
