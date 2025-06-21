@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('showcase', function (Blueprint $table) {
+        Schema::create('showcases', function (Blueprint $table) {
             $table->id();
             $table->text('about');
             $table->string('thumbnail');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('showcase');
+        Schema::dropIfExists('showcases');
     }
 };

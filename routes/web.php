@@ -26,10 +26,17 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChgPwController;
 use App\Http\Controllers\AccountSettingsController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ListBlogController;
 
+
+//Landing Page
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/team', [FrontController::class, 'team'])->name('front.team');
+Route::get('/about', [FrontController::class, 'about'])->name('front.about');
+
+
 //Admin Routes
-Route::get('/', [landingpageController::class, 'landingpage'])->name('landingpage');
 Route::get('/admin', [AdminDashboardController::class, 'index']);
 Route::resource('admin_banner', AdminBannerController::class);
 Route::resource('admin_product', AdminProductController::class);

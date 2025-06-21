@@ -13,7 +13,7 @@ class ListProductController extends Controller
         $query = Product::query();
 
         // Filter berdasarkan kategori (jika ada)
-        if ($request->has('category') && is_array($request->category)) {
+        if ($request->has('categories') && is_array($request->category)) {
             $query->whereIn('category_id', $request->category);
         }
 
