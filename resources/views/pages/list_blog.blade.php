@@ -1,75 +1,56 @@
-@extends('layouts.gallery')
+@extends('layouts.list_blog')
 
-@section('title', 'Gallery')
+@section('title', 'List Blog')
 
 @section('content')
-
-<!-- Banner -->
-<div class="relative h-64 flex items-center justify-center bg-fixed bg-center bg-cover" style="background-image: url('{{ asset('images/parallax banner.jpg') }}');">
-    <div class="bg-black bg-opacity-50 w-full h-full absolute inset-0"></div>
-    <div class="relative z-10 text-center px-4">
-        <h1 class="text-white text-5xl font-extrabold drop-shadow-lg" data-aos="fade-down">Our Vegetables</h1>
-        <p class="text-gray-200 mt-4 max-w-xl mx-auto font-medium" data-aos="fade-up" data-aos-delay="150">
-            Explore our wide selection of fresh, high-quality vegetables sourced directly from trusted local farms.
-        </p>
-    </div>
-</div>
-
-<!-- Filter + Gallery -->
 <div class="max-w-7xl mx-auto px-4 py-12 font-poppins">
-
-    <!-- Filter -->
-    <div x-data="{ open: true }" class="w-full mb-10 bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-2xl shadow-md">
+    <!-- Filter Accordion (mengikuti style dan behavior seperti list_product) -->
+    <div x-data="{ open: true }" class="w-full mb-10 bg-gradient-to-tr from-green-200 via-green-50 to-green-100 p-6 rounded-2xl shadow-lg">
         <div class="flex justify-between items-center cursor-pointer" @click="open = !open">
-            <h2 class="text-xl font-bold text-green-800">🔍 Filter Kategori</h2>
+            <h2 class="text-2xl font-bold text-green-800">🔍 Filter Kategori</h2>
             <span x-text="open ? '▲' : '▼'" class="text-green-800 text-xl font-bold"></span>
         </div>
-        <form method="GET" action="{{ url('/gallery') }}" id="filterForm"
+
+        <form id="filterForm"
               x-show="open" x-transition
-              class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-gray-700">
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-green-200 hover:shadow-md transition-all duration-300 col-span-full">
-                <h3 class="text-green-700 font-semibold mb-2">Kategori</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    @foreach ($categories as $cat)
-                        <label class="inline-flex items-center gap-2">
-                            <input
-                                type="checkbox"
-                                name="category[]"
-                                value="{{ $cat }}"
-                                {{ is_array(request('category')) && in_array($cat, request('category')) ? 'checked' : '' }}
-                                class="accent-green-600 focus:ring-2 focus:ring-green-400 focus:outline-none"
-                            >
-                            <span>{{ ucfirst($cat) }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </div>
+              class="mt-6 flex flex-wrap gap-4 text-sm text-gray-700">
+            @foreach ($categories as $cat)
+                <label class="inline-flex items-center gap-2 bg-white p-3 rounded-xl shadow-sm border border-green-200 hover:shadow-md transition-all duration-300 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        name="category[]"
+                        value="{{ strtolower($cat) }}"
+                        {{ is_array(request('category')) && in_array(strtolower($cat), request('category')) ? 'checked' : '' }}
+                        class="category-filter accent-green-600 focus:ring-2 focus:ring-green-400 focus:outline-none"
+                    >
+                    <span>{{ $cat }}</span>
+                </label>
+            @endforeach
         </form>
     </div>
 
-    <!-- Toggle View -->
-    <div class="flex justify-end mb-6">
+    <!-- Toggle View Button -->
+    <div class="flex justify-end mb-4">
         <button id="toggleView" class="px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition">
             📃 List View
         </button>
     </div>
 
-    <!-- Gallery -->
-    <div id="blogContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 transition-all duration-300">
-        @foreach ($vegetables as $item)
-        <div class="blog-card cursor-pointer bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.03] hover:shadow-xl product-card animate-fade-up border border-transparent hover:border-green-500 hover:ring hover:ring-green-200"
+    <!-- Blog Grid/List -->
+    <div id="blogContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 transition-all duration-300">
+        @foreach ($blogs as $item)
+        <div class="blog-card cursor-pointer bg-white rounded-2xl shadow-md hover:shadow-xl hover:ring-2 hover:ring-green-200 transform transition duration-300 hover:scale-[1.03] product-card animate-fade-up"
              data-category="{{ strtolower($item->category->category_name ?? 'lainnya') }}"
              data-title="{{ $item->title }}"
              data-image="{{ $item->image_url }}"
-             data-desc="{{ $item->description }}">
-            <img src="{{ $item->image_url }}" loading="lazy" alt="{{ $item->title }}"
-                 class="w-full h-48 object-cover rounded-t-xl transition duration-300 ease-in-out hover:brightness-110">
-            <div class="p-4 product-info">
-                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mb-2">
+             data-desc="{{ $item->content }}">
+            <img src="{{ $item->image_url }}" loading="lazy" alt="{{ $item->title }}" class="w-full h-48 object-cover rounded-t-2xl">
+            <div class="p-4 flex flex-col justify-between flex-grow text-center sm:text-left">
+                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mb-2 self-center sm:self-start">
                     {{ $item->category->category_name ?? 'Tanpa Kategori' }}
                 </span>
-                <h3 class="text-lg font-bold text-gray-900 mb-1">{{ $item->title }}</h3>
-                <p class="text-sm text-gray-600">{{ $item->description }}</p>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $item->title }}</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">{{ \Str::limit(strip_tags($item->content), 100) }}</p>
             </div>
         </div>
         @endforeach
@@ -83,6 +64,11 @@
         <img id="modalImage" src="" alt="" class="w-full h-48 object-cover rounded-lg mb-4">
         <h3 id="modalTitle" class="text-xl font-bold text-gray-900 mb-2"></h3>
         <p id="modalDesc" class="text-gray-700 text-sm leading-relaxed max-h-48 overflow-y-auto"></p>
+
+        <div class="flex justify-between mt-6">
+            <button id="prevBtn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200">&larr; Sebelumnya</button>
+            <button id="nextBtn" class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200">Selanjutnya &rarr;</button>
+        </div>
     </div>
 </div>
 
@@ -100,12 +86,6 @@
         padding: 1rem;
         text-align: left;
         transition: all 0.3s ease;
-        border: 1px solid transparent;
-    }
-
-    .list-view .product-card:hover {
-        border-color: #22c55e; /* green-500 */
-        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3); /* ring */
     }
 
     .list-view .product-card img {
@@ -113,12 +93,6 @@
         height: auto;
         margin-right: 1.5rem;
         border-radius: 1rem;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .list-view .product-card img:hover {
-        filter: brightness(1.1);
-        transform: scale(1.05);
     }
 
     .list-view .product-info {
@@ -158,23 +132,29 @@
         const container = document.getElementById('blogContainer');
         let isList = false;
 
+        // Submit form on filter change
         inputs.forEach(input => {
-            input.addEventListener('change', () => form.submit());
+            input.addEventListener('change', () => {
+                form.submit();
+            });
         });
 
+        // Toggle Grid/List view button
         toggleBtn.addEventListener('click', () => {
             isList = !isList;
+
             if (isList) {
-                container.classList.remove('grid', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+                container.classList.remove('grid', 'sm:grid-cols-2', 'lg:grid-cols-3');
                 container.classList.add('list-view');
                 toggleBtn.textContent = '🧱 Grid View';
             } else {
                 container.classList.remove('list-view');
-                container.classList.add('grid', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+                container.classList.add('grid', 'sm:grid-cols-2', 'lg:grid-cols-3');
                 toggleBtn.textContent = '📃 List View';
             }
         });
 
+        // Modal handling (optional, sama seperti versi sebelumnya)
         const blogCards = document.querySelectorAll('.blog-card');
         const modal = document.getElementById('modalOverlay');
         const modalImg = document.getElementById('modalImage');
@@ -211,5 +191,4 @@
         });
     });
 </script>
-
 @endsection
